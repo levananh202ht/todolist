@@ -66,13 +66,11 @@
   
 }
 .ContentList_Item li .toggle {
-  height: 58px;
   background: none;
   opacity: 0;
   text-align: center;
   margin: auto 0;
   width: 40px;
-
   margin: 9px 0;
   text-align: center;
   width: 40px;
@@ -90,6 +88,7 @@
 input[type="checkbox" i] {
   background-color: initial;
   width: 40px;
+  height: 58px;
   cursor: default;
   appearance: auto;
   box-sizing: border-box;
@@ -134,11 +133,5 @@ input[type="checkbox" i] {
   left: 14px;
   color: #888;
 }
-.container .content .Footer {
-  color: #777;
-    padding: 10px 15px;
-    height: 20px;
-    text-align: center;
-    border-top: 1px solid #e6e6e6;
-    display: flex;
+.container .content .footer {
 }
