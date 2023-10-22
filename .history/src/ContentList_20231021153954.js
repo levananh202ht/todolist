@@ -1,0 +1,53 @@
+import React from 'react';
+
+import { IoCloseOutline } from "react-icons/io5";
+import { IoChevronDown } from "react-icons/io5";
+class ContentList extends React.Component{
+    constructor(props){
+        super(props);
+        this.state ={
+            value: ''
+        }
+    }
+    //handleDelete = () => {    
+       // const {item, deleteItem} = this.props;
+      //  deleteItem(item.id);
+   // } 
+    //{
+    render(){
+        const { todolist,setName,  name, getTodoEditing, todoEditing} = this.props;
+        //const [name, setName] = useState(item.name);
+
+        const isEditing = todoEditing === todolist.id
+        return(
+            <div className='ContentList'>
+                <label className='Click'><IoChevronDown/></label>
+                <ul  className='ContentList_Item'>
+                    {
+                        todolist.map((item, index) => {
+                            return(
+                                <li  >
+                                    {isEditing ?
+                                        <div className='view'>
+                                            <label className='view_item' onDoubleClick={() => getTodoEditing(console.log(item.id))}> {item.name}</label>                                            
+                                            <button><IoCloseOutline onClick={this.handleDelete} /></button>
+                                        </div> :
+                                        (<input
+                                            id = {item.id}
+                                            className='edit' 
+                                            type='name'
+                                            onChange={e => setName(e.target.value)}
+                                            value={name}
+                                        />)
+                                    }
+                                </li>
+                            )
+                            
+                        })
+                    }
+                </ul>   
+            </div>
+        )
+    }
+}
+export default ContentList;

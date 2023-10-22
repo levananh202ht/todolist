@@ -1,0 +1,21 @@
+.main{
+  width: 550px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+.container{
+  width: 500px;
+  margin: 0 auto;
+  background-color: red;
+}
+.container .content {
+  
+}
+.container .content .Header{
+  
+}
+.container .content .ContentList{
+  
+}
+.container .content .footer {
+  
+}

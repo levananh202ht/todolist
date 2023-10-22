@@ -1,0 +1,33 @@
+import React from 'react'
+
+class Header extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            value: ''
+        }
+    }
+    onChangeInput = (event) => {
+        const {value} = event.target;
+        this.setState ({
+            value,
+        })
+    }
+    handlekeyDown = (event) => {
+        if(event.key === "Enter"){
+            this.setState({
+                value: event.target.value,
+            })
+
+        }
+    }
+    render(){
+        const {value} = this.state;
+        return(
+            <div className='Header'>
+                <input onKeyDown={this.handlekeyDown} value = {value} onChange={this.onChangeInput} />
+            </div>
+        )
+    }
+}
+export default Header;

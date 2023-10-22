@@ -1,0 +1,83 @@
+.html{
+}
+.container{
+  width: 100%;
+  margin: auto;
+  height: 166px;
+  background: #fff;
+  margin: 130px 0 40px 0;
+  padding:0 500px 0 0;
+}
+.container h1{
+  position: absolute;
+  top: -74px;
+  width: 100%;
+  font-size: 100px;
+  font-weight: 400;
+  text-align: center;
+  color: rgb(135 48 48 / 15%);
+}
+.container .main{
+  width: 550px;
+  height: 65.6px;
+  margin: 130px auto;
+  background: #f5f5f5;
+}
+.container .content {
+  width: 100%;
+  background: #f5f5f5;
+  border: 1px solid #777;
+  position: relative;
+}
+.container .content .Header{
+  width: 100%;
+  height: 65.6px;
+  color: #9999;
+}
+.Header_Input{
+  position: relative;
+  font-size: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-weight: 450;
+  line-height: 1.4em;
+  padding: 16px 16px 16px 60px;
+  border: none;
+  background: #f5f5f5;
+}
+.container .content .ContentList{
+  list-style: none;
+  box-shadow: 2px rgba(0,0,0,0.03);
+}
+.container .content .ContentList .ContentList_Item {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ContentList_Item li .toggle{
+  height: 58px;
+  width: 40px;
+  margin-top: -16px;
+}
+.container .content .ContentList .ContentList_Item {
+  padding: 15px 15px 20px 60px;
+  width: 550px;
+  height: 58px;
+  display: block;
+  box-sizing: border-box;
+  border: 1px solid #9999;
+}
+.container .content .ContentList .ContentList_Item .view .view_item .checkbox {
+  display: block;
+  transition: color 0.4s;
+}
+.container .content .ContentList .Click{
+  position: absolute;
+  top: 24px;
+  font-size: 21px;
+  left: 14px;
+  color: #888;
+}
+.container .content .footer {
+}

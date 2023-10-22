@@ -1,0 +1,32 @@
+.html{
+  background-color: #fff;
+}
+.container{
+}
+.container h1{
+  position: absolute;
+  top: -155px;
+  width: 100%;
+  font-size: 100px;
+  font-weight: 100;
+  text-align: center;
+  color: rgb(135 48 48 / 15%);
+}
+.container .main{
+  width: 500px;
+  background-color:  #f5f5f5;
+  margin: 130px auto;
+  box-shadow: rgba(0, 0, 0, 0.2);
+}
+.container .content {
+  
+}
+.container .content .Header{
+  
+}
+.container .content .ContentList{
+  
+}
+.container .content .footer {
+  
+}
