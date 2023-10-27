@@ -16,12 +16,14 @@ class App extends React.Component {
       ],     
       todoEditing: '',
       CompletedFooter: false,
-      todoListFiltered: [],
+      todoListFiltered: [ ],
+      textNewTodo: "",
     }
   }
   addItem = (item) => {  
     const {todolist} = this.state;
     const newTodo = [item, ...todolist];
+    debugger;
     this.setState({
       todolist: newTodo,
     })
@@ -36,8 +38,8 @@ class App extends React.Component {
   }
   handleAllClick = () => {
     const {todolist} = this.state;
-    let todoListFiltered = todolist
-    todoListFiltered.filter((item) => ([{...item}]));
+    const todoListFiltered = todolist.map((item) => ({...item}));
+    debugger;
     this.setState({
       todolist: todoListFiltered,
       CompletedFooter: false,
@@ -45,15 +47,15 @@ class App extends React.Component {
   }
   handleActiveClick = () => { 
     const {todolist} = this.state;  
-    let todoListFiltered = todolist
     this.setState({
-      todoListFiltered: todoListFiltered.filter(
+      todoListFiltered: todolist.filter(
         (item) => item.isCompleted === false
       ),
       CompletedFooter: "Active"
       });
   };
   handleCompletedClick = () => {
+    debugger;
     this.setState((prevState) => ({
       todoListFiltered: prevState.todolist.filter(
         (item) => item.isCompleted === true

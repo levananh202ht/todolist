@@ -36,34 +36,32 @@ class App extends React.Component {
   }
   handleAllClick = () => {
     const {todolist} = this.state;
-    let todoListFiltered = todolist
-    todoListFiltered.filter((item) => ([{...item}]));
+    const todoListFiltered = todolist.map((item) => ({...item}));
     this.setState({
       todolist: todoListFiltered,
       CompletedFooter: false,
     })
   }
   handleActiveClick = () => { 
-    const {todolist} = this.state;  
-    let todoListFiltered = todolist
+    const {todolist} = this.state;
+    const todoListFiltered = todolist.map((item) => item.isCompleted === false);
     this.setState({
-      todoListFiltered: todoListFiltered.filter(
-        (item) => item.isCompleted === false
-      ),
-      CompletedFooter: "Active"
-      });
-  };
+      todolist: todoListFiltered,
+      CompletedFooter: 'Active',
+    })
+  }
   handleCompletedClick = () => {
+    const {todolist} = this.state;
+    const todoListFiltered = todolist.map((item) => item.isCompleted === true);
+    debugger;
     this.setState((prevState) => ({
-      todoListFiltered: prevState.todolist.filter(
-        (item) => item.isCompleted === true
-      ),
-      CompletedFooter: "Completed"
-    }));
-  };
+      todolist: prevState(todoListFiltered),
+      CompletedFooter: 'Completed',
+    }))
+  }
 
   render(){
-    const {todolist, todoEditing, CompletedFooter} = this.state;
+    const {todolist, todoEditing, isCompleted} = this.state;
     return(
       <div className='container'>
         <h1>todos</h1>
@@ -75,11 +73,12 @@ class App extends React.Component {
             todolist = {todolist} 
             getTodoEditing={this.getTodoEditing} todoEditing={todoEditing} 
             />
-            <Footer   
+            <Footer 
+            todoListFiltered = {this.todoListFiltered}
             handleAllClick = {this.handleAllClick}
             handleActiveClick = {this.handleActiveClick}
             handleCompletedClick = {this.handleCompletedClick}
-            CompletedFooter = {CompletedFooter}
+            isCompleted = {isCompleted}
             />
           </div>
         </div>

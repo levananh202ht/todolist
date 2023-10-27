@@ -26,16 +26,16 @@ class Footer extends React.Component{
                     <button
                         href="#/"
                         className={CompletedFooter === false ? 'selected' : ''}
-                        onClick={handleAllClick}
+                        onClick={() =>handleAllClick}
                     >
                         All
                     </button>
                     <button 
                         href="#/active"
                         className={CompletedFooter === 'Active' ? 'selected' : ''}
-                        onClick={handleActiveClick}
+                        onClick={() =>handleActiveClick}
                     >
-                        Active  
+                        Active
                     </button>
                     <button
                         href="#/completed"

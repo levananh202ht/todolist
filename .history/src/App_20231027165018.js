@@ -45,9 +45,8 @@ class App extends React.Component {
   }
   handleActiveClick = () => { 
     const {todolist} = this.state;  
-    let todoListFiltered = todolist
     this.setState({
-      todoListFiltered: todoListFiltered.filter(
+      todoListFiltered: todolist.filter(
         (item) => item.isCompleted === false
       ),
       CompletedFooter: "Active"

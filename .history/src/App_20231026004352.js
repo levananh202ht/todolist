@@ -14,9 +14,7 @@ class App extends React.Component {
         {id: 1, name: "hoc", isCompleted: false },
         {id: 2, name: "choi", isCompleted: false }
       ],     
-      todoEditing: '',
-      CompletedFooter: false,
-      todoListFiltered: [],
+      todoEditing: ''
     }
   }
   addItem = (item) => {  
@@ -34,36 +32,9 @@ class App extends React.Component {
       todolist: preState.todolist.map(item => item.id === id ? ({...item, isCompleted: !item.isCompleted}): item)
     }))
   }
-  handleAllClick = () => {
-    const {todolist} = this.state;
-    let todoListFiltered = todolist
-    todoListFiltered.filter((item) => ([{...item}]));
-    this.setState({
-      todolist: todoListFiltered,
-      CompletedFooter: false,
-    })
-  }
-  handleActiveClick = () => { 
-    const {todolist} = this.state;  
-    let todoListFiltered = todolist
-    this.setState({
-      todoListFiltered: todoListFiltered.filter(
-        (item) => item.isCompleted === false
-      ),
-      CompletedFooter: "Active"
-      });
-  };
-  handleCompletedClick = () => {
-    this.setState((prevState) => ({
-      todoListFiltered: prevState.todolist.filter(
-        (item) => item.isCompleted === true
-      ),
-      CompletedFooter: "Completed"
-    }));
-  };
 
   render(){
-    const {todolist, todoEditing, CompletedFooter} = this.state;
+    const {todolist, todoEditing} = this.state;
     return(
       <div className='container'>
         <h1>todos</h1>
@@ -73,14 +44,9 @@ class App extends React.Component {
             <ContentList 
             markCompleted={this.markCompleted} 
             todolist = {todolist} 
-            getTodoEditing={this.getTodoEditing} todoEditing={todoEditing} 
+            todoEditing={todoEditing} 
             />
-            <Footer   
-            handleAllClick = {this.handleAllClick}
-            handleActiveClick = {this.handleActiveClick}
-            handleCompletedClick = {this.handleCompletedClick}
-            CompletedFooter = {CompletedFooter}
-            />
+            <Footer />
           </div>
         </div>
       </div>

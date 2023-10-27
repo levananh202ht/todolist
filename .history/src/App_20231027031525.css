@@ -152,7 +152,7 @@ input:checked + label{
   color: inherit;
   margin: 3px;
   padding: 3px 7px;
-  /* border: 1px solid  rgba(175, 47, 47, 0.2); */
+  border: 1px solid  rgba(175, 47, 47, 0.2);
   border-radius: 3px;
 }
 .filters button.selected {

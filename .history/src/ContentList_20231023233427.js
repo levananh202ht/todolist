@@ -7,13 +7,20 @@ class ContentList extends React.Component{
         super(props);
         this.state ={
             value: '',
+            isEditing: false
         }
     }
+    //handleDelete = () => {    
+       // const {item, deleteItem} = this.props;
+      //  deleteItem(item.id);
+   // } 
+    //{
+        //<button><IoCloseOutline onClick={this.handleDelete} /></button>
     render(){
-        const { todolist,item, todoEditing, markCompleted} = this.props;
+        const { todolist,item,  getTodoEditing, todoEditing, markCompleted} = this.props;
         //const [name, setName] = useState(item.name);
+
         const isEditing = todoEditing === todolist.id
-        
         return(
             <div className='ContentList'>
                 <label className='Click'><IoChevronDown/></label>
@@ -30,7 +37,7 @@ class ContentList extends React.Component{
                                             checked = {item.isCompleted} 
                                             onChange = {() => markCompleted(item.id)}
                                             />
-                                            <label   checked = {todolist.isCompleted} className='view_item' > {item.name}</label>                                            
+                                            <label   checked = {todolist.isCompleted} className='view_item' onDoubleClick={() => getTodoEditing(item.id)}> {item.name}</label>                                            
                                             
                                         </div> :
                                         (<input

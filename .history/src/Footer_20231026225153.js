@@ -17,11 +17,12 @@ class Footer extends React.Component{
         }
     };
     render(){
-        const {count} = this.state
+        const {count, todoListFiltered} = this.state
+        const countedLeft = todoListFiltered.filter(item => !item.completed).length;
         const {handleAllClick,handleActiveClick, handleCompletedClick, CompletedFooter} = this.props
         return(            
             <div className='Footer'>
-                <p className='iteam' onClick={this.countClick}>{count} iteams left</p>
+                <p className='iteam' onClick={this.countClick}>{countedLeft} iteams left</p>
                 <div className='filters'>
                     <button
                         href="#/"
@@ -35,12 +36,12 @@ class Footer extends React.Component{
                         className={CompletedFooter === 'Active' ? 'selected' : ''}
                         onClick={handleActiveClick}
                     >
-                        Active  
+                        Active
                     </button>
                     <button
                         href="#/completed"
-                        className={CompletedFooter === "Completed" ? "selected" : ""}
-                        onClick={() =>handleCompletedClick}
+                        className={CompletedFooter === 'Completed' ? 'selected' : ''}
+                        onClick={handleCompletedClick}
                     >
                         Completed
                     </button>

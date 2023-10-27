@@ -7,11 +7,13 @@ class ContentList extends React.Component{
         super(props);
         this.state ={
             value: '',
+            isEditing: false
         }
     }
     render(){
         const { todolist,item, todoEditing, markCompleted} = this.props;
         //const [name, setName] = useState(item.name);
+        debugger;
         const isEditing = todoEditing === todolist.id
         
         return(

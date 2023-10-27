@@ -16,7 +16,6 @@ class App extends React.Component {
       ],     
       todoEditing: '',
       CompletedFooter: false,
-      todoListFiltered: [],
     }
   }
   addItem = (item) => {  
@@ -36,34 +35,33 @@ class App extends React.Component {
   }
   handleAllClick = () => {
     const {todolist} = this.state;
-    let todoListFiltered = todolist
-    todoListFiltered.filter((item) => ([{...item}]));
+    const newAll = [{...todolist}]  
+    debugger;
     this.setState({
-      todolist: todoListFiltered,
+      todolist: newAll,
       CompletedFooter: false,
     })
   }
-  handleActiveClick = () => { 
-    const {todolist} = this.state;  
-    let todoListFiltered = todolist
-    this.setState({
-      todoListFiltered: todoListFiltered.filter(
-        (item) => item.isCompleted === false
-      ),
-      CompletedFooter: "Active"
-      });
-  };
-  handleCompletedClick = () => {
+  handleActiveClick = () => {
+    debugger;
     this.setState((prevState) => ({
       todoListFiltered: prevState.todolist.filter(
-        (item) => item.isCompleted === true
+        (todolist) => todolist.completed === false
       ),
-      CompletedFooter: "Completed"
+      CompletedFooter: "Active"
     }));
-  };
+  }
+  handleCompletedClick = () => {
+    const {todolist} = this.state;
+    const newCompleted = [{...todolist.completed === true}]
+    this.setState({
+      todolist: newCompleted,
+      CompletedFooter: 'Completed',
+    })
+  }
 
   render(){
-    const {todolist, todoEditing, CompletedFooter} = this.state;
+    const {todolist, todoEditing, isCompleted} = this.state;
     return(
       <div className='container'>
         <h1>todos</h1>
@@ -75,11 +73,11 @@ class App extends React.Component {
             todolist = {todolist} 
             getTodoEditing={this.getTodoEditing} todoEditing={todoEditing} 
             />
-            <Footer   
+            <Footer 
             handleAllClick = {this.handleAllClick}
             handleActiveClick = {this.handleActiveClick}
             handleCompletedClick = {this.handleCompletedClick}
-            CompletedFooter = {CompletedFooter}
+            isCompleted = {isCompleted}
             />
           </div>
         </div>

@@ -36,8 +36,7 @@ class App extends React.Component {
   }
   handleAllClick = () => {
     const {todolist} = this.state;
-    let todoListFiltered = todolist
-    todoListFiltered.filter((item) => ([{...item}]));
+    const todoListFiltered = todolist.map((item) => ({...item}));
     this.setState({
       todolist: todoListFiltered,
       CompletedFooter: false,
@@ -45,22 +44,22 @@ class App extends React.Component {
   }
   handleActiveClick = () => { 
     const {todolist} = this.state;  
-    let todoListFiltered = todolist
     this.setState({
-      todoListFiltered: todoListFiltered.filter(
+      todoListFiltered: todolist.filter(
         (item) => item.isCompleted === false
       ),
       CompletedFooter: "Active"
       });
   };
   handleCompletedClick = () => {
-    this.setState((prevState) => ({
-      todoListFiltered: prevState.todolist.filter(
+    const {todolist} = this.state;
+    this.setState({
+      todoListFiltered: todolist.filter(
         (item) => item.isCompleted === true
       ),
       CompletedFooter: "Completed"
-    }));
-  };
+      });
+  }
 
   render(){
     const {todolist, todoEditing, CompletedFooter} = this.state;
@@ -76,6 +75,7 @@ class App extends React.Component {
             getTodoEditing={this.getTodoEditing} todoEditing={todoEditing} 
             />
             <Footer   
+            todoListFiltered = {this.todoListFiltered}
             handleAllClick = {this.handleAllClick}
             handleActiveClick = {this.handleActiveClick}
             handleCompletedClick = {this.handleCompletedClick}

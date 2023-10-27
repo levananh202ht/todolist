@@ -88,7 +88,17 @@ input:checked + label{
   color: #d9d9d9;
   text-decoration: line-through; 
 }
-
+input[type="checkbox" i] {
+  background-color: initial;
+  width: 40px;
+  cursor: default;
+  appearance: auto;
+  box-sizing: border-box;
+  -webkit-appearance: checkbox;
+  margin: 3px 3px 3px 4px;
+  padding: initial;
+  border: initial;
+}
 .ContentList_Item li {
   position: relative;
   font-size: 24px;
@@ -130,6 +140,8 @@ input:checked + label{
     height: 20px;
     text-align: center;
     border-top: 1px solid #e6e6e6;
+    display: flex;
+    justify-content: space-between;
 
 }
 .container .content .Footer .iteam {
@@ -148,20 +160,5 @@ input:checked + label{
 }
 .filters button {
   list-style: none;
-  cursor: pointer;
-  color: inherit;
-  margin: 3px;
-  padding: 3px 7px;
-  /* border: 1px solid  rgba(175, 47, 47, 0.2); */
-  border-radius: 3px;
-}
-.filters button.selected {
-  /* border-color: rgba(175, 47, 47, 0.2); */
-}
-.clear-completed{
-  float: right;
-  position: relative;
-  line-height: 20px;
-  text-decoration: none;
   cursor: pointer;
 }

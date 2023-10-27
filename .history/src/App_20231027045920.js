@@ -16,7 +16,7 @@ class App extends React.Component {
       ],     
       todoEditing: '',
       CompletedFooter: false,
-      todoListFiltered: [],
+      newTodo: [],
     }
   }
   addItem = (item) => {  
@@ -36,26 +36,26 @@ class App extends React.Component {
   }
   handleAllClick = () => {
     const {todolist} = this.state;
-    let todoListFiltered = todolist
-    todoListFiltered.filter((item) => ([{...item}]));
+    const newTodo = todolist.filter((item) => ([{...item}]));
     this.setState({
-      todolist: todoListFiltered,
+      todolist: newTodo,
       CompletedFooter: false,
     })
   }
   handleActiveClick = () => { 
     const {todolist} = this.state;  
-    let todoListFiltered = todolist
+    debugger;
     this.setState({
-      todoListFiltered: todoListFiltered.filter(
+      newTodo: todolist.filter(
         (item) => item.isCompleted === false
       ),
       CompletedFooter: "Active"
       });
   };
   handleCompletedClick = () => {
+    debugger;
     this.setState((prevState) => ({
-      todoListFiltered: prevState.todolist.filter(
+      newTodo: prevState.todolist.filter(
         (item) => item.isCompleted === true
       ),
       CompletedFooter: "Completed"

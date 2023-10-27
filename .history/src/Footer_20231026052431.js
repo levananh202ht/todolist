@@ -18,29 +18,29 @@ class Footer extends React.Component{
     };
     render(){
         const {count} = this.state
-        const {handleAllClick,handleActiveClick, handleCompletedClick, CompletedFooter} = this.props
+        const {handleAllClick,handleActiveClick, handleCompletedClick, isCompleted} = this.props
         return(            
             <div className='Footer'>
                 <p className='iteam' onClick={this.countClick}>{count} iteams left</p>
                 <div className='filters'>
                     <button
-                        href="#/"
-                        className={CompletedFooter === false ? 'selected' : ''}
+                        //href="#/"
+                        className={isCompleted === false ? 'selected' : ''}
                         onClick={handleAllClick}
                     >
                         All
                     </button>
                     <button 
-                        href="#/active"
-                        className={CompletedFooter === 'Active' ? 'selected' : ''}
+                        //href="#/active"
+                        className={isCompleted === 'Active' ? 'selected' : ''}
                         onClick={handleActiveClick}
                     >
-                        Active  
+                        Active
                     </button>
                     <button
-                        href="#/completed"
-                        className={CompletedFooter === "Completed" ? "selected" : ""}
-                        onClick={() =>handleCompletedClick}
+                        //href="#/completed"
+                        className={isCompleted === 'Completed' ? 'selected' : ''}
+                        onClick={handleCompletedClick}
                     >
                         Completed
                     </button>

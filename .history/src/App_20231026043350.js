@@ -11,12 +11,11 @@ class App extends React.Component {
     super(props);
     this.state = {
       todolist: [
-        {id: 1, name: "hoc", isCompleted: false },
-        {id: 2, name: "choi", isCompleted: false }
+        {id: 1, name: "hoc", completed: false },
+        {id: 2, name: "choi", completed: false }
       ],     
       todoEditing: '',
-      CompletedFooter: false,
-      todoListFiltered: [],
+      isCompleted: false,
     }
   }
   addItem = (item) => {  
@@ -35,35 +34,37 @@ class App extends React.Component {
     }))
   }
   handleAllClick = () => {
+    debugger;
     const {todolist} = this.state;
-    let todoListFiltered = todolist
-    todoListFiltered.filter((item) => ([{...item}]));
+    const {newAll} = {...todolist}
     this.setState({
-      todolist: todoListFiltered,
-      CompletedFooter: false,
+      todolist: newAll,
+      isCompleted: false,
     })
   }
-  handleActiveClick = () => { 
-    const {todolist} = this.state;  
-    let todoListFiltered = todolist
+  handleActiveClick = () => {
+    debugger;
+    const {todolist} = this.state;
+    const {newActive} = {...todolist.completed === false}
     this.setState({
-      todoListFiltered: todoListFiltered.filter(
-        (item) => item.isCompleted === false
-      ),
-      CompletedFooter: "Active"
-      });
-  };
+      todolist: newActive,
+      isCompleted: 'Active',
+    })
+  }
   handleCompletedClick = () => {
-    this.setState((prevState) => ({
-      todoListFiltered: prevState.todolist.filter(
-        (item) => item.isCompleted === true
-      ),
-      CompletedFooter: "Completed"
-    }));
-  };
+    debugger;
+    const {todolist} = this.state;
+    debugger;
+    const {newCompleted} = {...todolist.completed === true}
+    debugger;
+    this.setState({
+      todolist: newCompleted,
+      isCompleted: 'Completed',
+    })
+  }
 
   render(){
-    const {todolist, todoEditing, CompletedFooter} = this.state;
+    const {todolist, todoEditing, isCompleted} = this.state;
     return(
       <div className='container'>
         <h1>todos</h1>
@@ -75,11 +76,11 @@ class App extends React.Component {
             todolist = {todolist} 
             getTodoEditing={this.getTodoEditing} todoEditing={todoEditing} 
             />
-            <Footer   
+            <Footer 
             handleAllClick = {this.handleAllClick}
             handleActiveClick = {this.handleActiveClick}
             handleCompletedClick = {this.handleCompletedClick}
-            CompletedFooter = {CompletedFooter}
+            isCompleted = {isCompleted}
             />
           </div>
         </div>
