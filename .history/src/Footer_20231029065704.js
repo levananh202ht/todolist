@@ -41,7 +41,6 @@ class Footer extends React.Component{
 }
 Footer.propTypes = {
     todoList: propstypes.array,
-    CompletedFooter: propstypes.string,
     deleteAll: propstypes.func,
     handleCompletedClick: propstypes.string,
     handleActiveClick: propstypes.func.isRequired,

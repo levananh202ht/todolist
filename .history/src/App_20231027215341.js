@@ -29,49 +29,22 @@ class App extends React.Component {
   }
   
   markCompleted = ( id = '') => {
-    const {todolist, todoListFiltered} = this.state;
+    const {todolist} = this.state;
    // const newCompleted = preState.todolist.map(item => item.id === id)
     this.setState(preState => ({
       todolist: preState.todolist.map(item => item.id === id ? ({...item, isCompleted: !item.isCompleted}): item)
     }))
   }
-  toggleCompleteStatus = (id) => {
-    const { CompletedFooter } = this.state;
-    this.setState(({todolist,todoListFiltered}) => ({
-      todolist: todolist.map((item) => {
-        if (item.id === id) {
-          return { ...item, isCompleted: !item.isCompleted };
-        }
-
-        return item;
-      }),
-      todoListFiltered: todoListFiltered.map((item) => {
-        if (item.id === id) {
-          return { ...item, isCompleted: !item.isCompleted };
-        }
-
-        return item;
-      })
-    }));
-
-    if (CompletedFooter === "Completed") {
-      this.handleCompletedClick();
-    }
-
-    if (CompletedFooter === "Active") {
-      this.handleActiveClick();
-    }
-  };
   handleAllClick = () => {
     const {todolist} = this.state;
-    const todoListFiltered = todolist.map((item) => ({...item}));
+    const todoListFiltered = todolist.map((item) => ([{...item}]));
     this.setState({
       todolist: todoListFiltered,
-      CompletedFooter: false,
+      CompletedFooter: "All",
     })
   }
   handleActiveClick = () => { 
-    const {todolist} = this.state; 
+    const {todolist} = this.state;  
     this.setState({
       todoListFiltered: todolist.map(
         (item) => item.isCompleted === false
@@ -88,24 +61,9 @@ class App extends React.Component {
       CompletedFooter: "Completed"
       });
   };
-  deleteItem = (id) => {
-    const {todolist} = this.state;
-    const newDelete = todolist.filter((item) => item.id !== id);
-    this.setState({
-      todolist: newDelete
-    })
-  }
-  deleteAll = () => {
-    const {todolist} = this.state;
-    const newList = todolist.filter((item) => !item.isCompleted)
-    this.setState({
-      todoList: newList,
-    });
-  };
 
   render(){
     const {todolist, todoEditing, CompletedFooter} = this.state;
-    const countedLeft = todolist.filter((item) => !item.isCompleted).length;
     return(
       <div className='container'>
         <h1>todos</h1>
@@ -114,18 +72,14 @@ class App extends React.Component {
             <Header addItem = {this.addItem} todolist = {todolist}   />
             <ContentList 
             markCompleted={this.markCompleted} 
-            toggleCompleteStatus={this.toggleCompleteStatus}
             todolist = {todolist} 
             getTodoEditing={this.getTodoEditing} todoEditing={todoEditing} 
-            deleteItem = {this.deleteItem}
             />
             <Footer   
             handleAllClick = {this.handleAllClick}
             handleActiveClick = {this.handleActiveClick}
             handleCompletedClick = {this.handleCompletedClick}
             CompletedFooter = {CompletedFooter}
-            deleteAll = {this.deleteAll}
-            countedLeft = {countedLeft}
             />
           </div>
         </div>

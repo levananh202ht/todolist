@@ -166,8 +166,8 @@ input:checked + label{
   cursor: pointer;
 }
 .deleClick {
+  display: none;
   position: absolute;
-  border: none;
   top: 0;
   right: 10px;
   bottom: 0;

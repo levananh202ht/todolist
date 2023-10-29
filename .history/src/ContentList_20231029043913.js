@@ -9,8 +9,11 @@ class ContentList extends React.Component{
             value: '',
         }
     }
+    deleteItem = () => {
+        console.log('aaa');
+      }
     render(){
-        const { todolist, todoEditing, toggleCompleteStatus, deleteItem} = this.props;
+        const { todolist,item, todoEditing, toggleCompleteStatus, deleteItem} = this.props;
         //const [name, setName] = useState(item.name);
         const isEditing = todoEditing === todolist.id
         
@@ -32,7 +35,7 @@ class ContentList extends React.Component{
                                             />
                                             <label   checked = {todolist.isCompleted} className='view_item' > {item.name}</label>    
                                             <button className='deleClick'
-                                                onClick={() => deleteItem(item.id)}
+                                                onClick={(e) => this.deleteItem()}
                                             >
                                                 <IoClose />
                                                 

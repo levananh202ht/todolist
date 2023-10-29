@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IoClose } from "react-icons/io5";
+import { IoCloseOutline } from "react-icons/io5";
 import { IoChevronDown } from "react-icons/io5";
 class ContentList extends React.Component{
     constructor(props){
@@ -10,7 +10,7 @@ class ContentList extends React.Component{
         }
     }
     render(){
-        const { todolist, todoEditing, toggleCompleteStatus, deleteItem} = this.props;
+        const { todolist,item, todoEditing, markCompleted} = this.props;
         //const [name, setName] = useState(item.name);
         const isEditing = todoEditing === todolist.id
         
@@ -28,15 +28,10 @@ class ContentList extends React.Component{
                                             className='toggle' 
                                             type='checkbox'  
                                             checked = {item.isCompleted} 
-                                            onChange = {() => toggleCompleteStatus(item.id)}
+                                            onChange = {() => markCompleted(item.id)}
                                             />
-                                            <label   checked = {todolist.isCompleted} className='view_item' > {item.name}</label>    
-                                            <button className='deleClick'
-                                                onClick={() => deleteItem(item.id)}
-                                            >
-                                                <IoClose />
-                                                
-                                            </button>                                        
+                                            <label   checked = {todolist.isCompleted} className='view_item' > {item.name}</label>                                            
+                                            
                                         </div> :
                                         (<input
                                             

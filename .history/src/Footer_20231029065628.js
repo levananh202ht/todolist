@@ -1,8 +1,8 @@
 import React from 'react';
 import propstypes from "prop-types";
 class Footer extends React.Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
     }
     render(){
         const {deleteAll} = this.props;
@@ -41,7 +41,6 @@ class Footer extends React.Component{
 }
 Footer.propTypes = {
     todoList: propstypes.array,
-    CompletedFooter: propstypes.string,
     deleteAll: propstypes.func,
     handleCompletedClick: propstypes.string,
     handleActiveClick: propstypes.func.isRequired,

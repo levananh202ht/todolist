@@ -32,7 +32,7 @@ class ContentList extends React.Component{
                                             />
                                             <label   checked = {todolist.isCompleted} className='view_item' > {item.name}</label>    
                                             <button className='deleClick'
-                                                onClick={() => deleteItem(item.id)}
+                                                onClick={() => deleteItem()}
                                             >
                                                 <IoClose />
                                                 

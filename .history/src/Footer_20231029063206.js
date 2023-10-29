@@ -1,12 +1,25 @@
 import React from 'react';
-import propstypes from "prop-types";
+
 class Footer extends React.Component{
     constructor(){
         super()
+        this.state = {
+            count : 0
+        }
     }
+    // countClick = (e) => {
+    //     if (e.key === "Enter") {
+    //     const count = this.state.count;
+    //     const countNew =  count + 1
+    //     this.setState({ 
+    //         count : countNew,
+    //     });
+    //     }
+    // };
     render(){
         const {deleteAll} = this.props;
-        const {handleAllClick,handleActiveClick, handleCompletedClick, CompletedFooter, countedLeft} = this.props
+        const {handleAllClick,handleActiveClick, handleCompletedClick, CompletedFooter, todolist} = this.props
+        const countedLeft = todolist.filter((item) => !item.isCompleted).length;
         return(            
             <div className='Footer'>
                 <p className='iteam' onClick={this.countClick}>{countedLeft} iteams left</p>
@@ -39,12 +52,4 @@ class Footer extends React.Component{
         )
     }
 }
-Footer.propTypes = {
-    todoList: propstypes.array,
-    CompletedFooter: propstypes.string,
-    deleteAll: propstypes.func,
-    handleCompletedClick: propstypes.string,
-    handleActiveClick: propstypes.func.isRequired,
-    handleAllClick: propstypes.func.isRequired,
-};
 export default Footer;
