@@ -71,7 +71,7 @@ class App extends React.Component {
   handleActiveClick = () => { 
     const {todolist} = this.state; 
     const todoListFiltered = todolist;
-    todoListFiltered.map((item) => item.isCompleted = false);
+    todoListFiltered.map((item) => item.isCompleted == false);
     this.setState({
       CompletedFooter: newFilter.Active,
       todolist: todoListFiltered

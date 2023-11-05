@@ -51,14 +51,38 @@ class App extends React.Component {
     }))
   }
   toggleCompleteStatus = (id) => {
-    this.setState(({todolist}) => ({
+    // this.setState(({todolist}) => ({
+    //   todolist: todolist.map((item) => {
+    //     if (item.id === id) {
+    //       return { ...item, isCompleted: !item.isCompleted };
+    //     }
+    //     return item;
+    //   }),
+    // }));
+    const { CompletedFooter } = this.state;
+
+    this.setState(({ todolist, todoListFiltered }) => ({
       todolist: todolist.map((item) => {
         if (item.id === id) {
           return { ...item, isCompleted: !item.isCompleted };
         }
         return item;
       }),
+      todoListFiltered: todoListFiltered.map((item) => {
+        if (item.id === id) {
+          return { ...item, isCompleted: !item.isCompleted };
+        }
+        return item;
+      })
     }));
+
+    if (CompletedFooter === newFilter.Active) {
+      this.handleActiveClick();
+    }
+
+    if (CompletedFooter === newFilter.Completed) {
+      this.handleCompletedClick();
+    }
   };
   handleAllClick = () => {
     const {todolist} = this.state;
@@ -71,7 +95,7 @@ class App extends React.Component {
   handleActiveClick = () => { 
     const {todolist} = this.state; 
     const todoListFiltered = todolist;
-    todoListFiltered.map((item) => item.isCompleted = false);
+    todoListFiltered.map((item) => item.isCompleted === false);
     this.setState({
       CompletedFooter: newFilter.Active,
       todolist: todoListFiltered
@@ -80,7 +104,7 @@ class App extends React.Component {
   handleCompletedClick = () => {
     const {todolist} = this.state;  
     const todoListFiltered = todolist;
-    todoListFiltered.map((item) => item.isCompleted = true);
+    todoListFiltered.map((item) => item.isCompleted === true);
     this.setState({
       CompletedFooter:newFilter.Completed,
       todolist: todoListFiltered

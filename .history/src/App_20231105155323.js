@@ -63,7 +63,7 @@ class App extends React.Component {
   handleAllClick = () => {
     const {todolist} = this.state;
     const todoListFiltered = todolist;
-    todoListFiltered.map((item) => ({...item}));
+    todoListFiltered.filter((item) => ({...item}));
     this.setState({
       todolist: todoListFiltered
     })
@@ -71,7 +71,8 @@ class App extends React.Component {
   handleActiveClick = () => { 
     const {todolist} = this.state; 
     const todoListFiltered = todolist;
-    todoListFiltered.map((item) => item.isCompleted = false);
+    todoListFiltered.filter((item) => item.isCompleted === false);
+    debugger
     this.setState({
       CompletedFooter: newFilter.Active,
       todolist: todoListFiltered
@@ -80,7 +81,7 @@ class App extends React.Component {
   handleCompletedClick = () => {
     const {todolist} = this.state;  
     const todoListFiltered = todolist;
-    todoListFiltered.map((item) => item.isCompleted = true);
+    todoListFiltered.filter((item) => item.isCompleted === true);
     this.setState({
       CompletedFooter:newFilter.Completed,
       todolist: todoListFiltered
@@ -105,9 +106,10 @@ class App extends React.Component {
     const newTodolist = todolist.filter(item =>  item.id !== id)
     const newEdit = todolist.find(item =>  item.id === id)
     console.log(newEdit.name);
+    const {value} = event.target.newEdit.name;
     this.setState({
       //todolist: newTodolist,
-      value: newEdit.name
+      value: value
     })
     this.headerRef.current.focusInput(newEdit.name);
     // const newUpdate = todolist.map((item) => {
@@ -141,7 +143,7 @@ class App extends React.Component {
 
 
   render(){
-    const {todolist, todoEditing, CompletedFooter} = this.state;
+    const {todolist, todoEditing, CompletedFooter,newFilter} = this.state;
     const countedLeft = todolist.filter((item) => !item.isCompleted).length;
     return(
       <ThemeContext.Provider >

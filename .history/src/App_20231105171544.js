@@ -51,14 +51,40 @@ class App extends React.Component {
     }))
   }
   toggleCompleteStatus = (id) => {
-    this.setState(({todolist}) => ({
+    // this.setState(({todolist}) => ({
+    //   todolist: todolist.map((item) => {
+    //     if (item.id === id) {
+    //       return { ...item, isCompleted: !item.isCompleted };
+    //     }
+    //     return item;
+    //   }),
+    // }));
+    const { CompletedFooter } = this.state;
+
+    this.setState(({ todolist, todoListFiltered }) => ({
       todolist: todolist.map((item) => {
         if (item.id === id) {
           return { ...item, isCompleted: !item.isCompleted };
         }
+
         return item;
       }),
+      todoListFiltered: todoListFiltered.map((item) => {
+        if (item.id === id) {
+          return { ...item, isCompleted: !item.isCompleted };
+        }
+
+        return item;
+      })
     }));
+
+    if (CompletedFooter === newFilter.Active) {
+      this.handleActiveClick();
+    }
+
+    if (CompletedFooter === newFilter.Completed) {
+      this.handleCompletedClick();
+    }
   };
   handleAllClick = () => {
     const {todolist} = this.state;

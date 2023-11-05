@@ -72,6 +72,7 @@ class App extends React.Component {
     const {todolist} = this.state; 
     const todoListFiltered = todolist;
     todoListFiltered.map((item) => item.isCompleted = false);
+    debugger
     this.setState({
       CompletedFooter: newFilter.Active,
       todolist: todoListFiltered
