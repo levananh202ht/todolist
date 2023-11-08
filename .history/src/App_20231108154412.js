@@ -24,7 +24,7 @@ function App() {
     {id: 2, name: "choi", isCompleted: false }
   ]);
   const [filterTodo, setFilterTodo] = useState([]);
-  const [filter, setFilter] = useState(newFilter.All);
+  const [filtere, setFilter] = useState(newFilter.All);
   const headerRef = useRef();
     // this.state = {
     //   todolist: [
@@ -38,14 +38,15 @@ function App() {
     //   themeActive: theme.light
     // }
   useEffect(() => {
-    if(filter === newFilter.All){
+    if(filtere === newFilter.All){
       setFilterTodo(todolist);
-    }else if(filter === newFilter.Active){
+    }else if(filtere === newFilter.Active){
       setFilterTodo(todolist.filter(item => !item.isCompleted));
-    }else if(filter === newFilter.Completed){
+    }else if(filtere === newFilter.Completed){
       setFilterTodo(todolist.filter(item => item.isCompleted));
     }
   },[filter,todolist]);
+
   const addItem = (item) => {  
     setTodolist(prevTodolist => [item, ...prevTodolist]);
   }
@@ -71,14 +72,13 @@ function App() {
     setTodolist(newList)
   };
   const handleEdit = (id,event) =>{
-
     const newEdit = todolist.filter(item =>{
       if(id === item.id){
         return {...item, name: event};
       }
       return item;
     })
-    console.log(newEdit.name )
+    console.log(newEdit )
     setTodolist(newEdit)
     // const { todolist } = this.state;
     // const newTodolist = todolist.filter(item =>  item.id !== id)

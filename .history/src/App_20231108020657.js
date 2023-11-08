@@ -1,4 +1,5 @@
-import React, {useRef, useState, useEffect} from 'react'
+import React, {useRef, useState} from 'react'
+import logo from './logo.svg';
 import './App.css';
 
 import Header from './Header';
@@ -20,12 +21,10 @@ export const newFilter = {
 };
 function App() {
   const [todolist, setTodolist] = useState([
-    {id: 1, name: "hoc", isCompleted: true },
+    {id: 1, name: "hoc", isCompleted: false },
     {id: 2, name: "choi", isCompleted: false }
   ]);
-  const [filterTodo, setFilterTodo] = useState([]);
-  const [filter, setFilter] = useState(newFilter.All);
-  const headerRef = useRef();
+    const headerRef = useRef();
     // this.state = {
     //   todolist: [
     //     {id: 1, name: "hoc", isCompleted: false },
@@ -37,19 +36,17 @@ function App() {
     //   value: "",
     //   themeActive: theme.light
     // }
-  useEffect(() => {
-    if(filter === newFilter.All){
-      setFilterTodo(todolist);
-    }else if(filter === newFilter.Active){
-      setFilterTodo(todolist.filter(item => !item.isCompleted));
-    }else if(filter === newFilter.Completed){
-      setFilterTodo(todolist.filter(item => item.isCompleted));
-    }
-  },[filter,todolist]);
   const addItem = (item) => {  
     setTodolist(prevTodolist => [item, ...prevTodolist]);
   }
   
+  // markCompleted = ( id = '') => {
+  //   const {todolist, todoListFiltered} = this.state;
+  //  // const newCompleted = preState.todolist.map(item => item.id === id)
+  //   this.setState(preState => ({
+  //     todolist: preState.todolist.map(item => item.id === id ? ({...item, isCompleted: !item.isCompleted}): item)
+  //   }))
+  // }
   const toggleCompleteStatus = (id) => {
     const newCompleted =  todolist.map((item) => {
       if (item.id === id) {
@@ -59,9 +56,32 @@ function App() {
     })
     setTodolist(newCompleted)
   };
-  const handleFilter = (index) => {
-    setFilter(index);
+  const handleAllClick = () => {
+    const {todolist} = this.state;
+    const todoListFiltered = todolist;
+    todoListFiltered.map((item) => ({...item}));
+    this.setState({
+      todolist: todoListFiltered
+    })
   }
+  const handleActiveClick = () => { 
+    const {todolist} = this.state; 
+    const todoListFiltered = todolist;
+    todoListFiltered.map((item) => item.isCompleted = false);
+    this.setState({
+      CompletedFooter: newFilter.Active,
+      todolist: todoListFiltered
+      });
+  };
+  const handleCompletedClick = () => {
+    const {todolist} = this.state;  
+    const todoListFiltered = todolist;
+    todoListFiltered.map((item) => item.isCompleted = true);
+    this.setState({
+      CompletedFooter:newFilter.Completed,
+      todolist: todoListFiltered
+      });
+  };
   const deleteItem = (id) => {
     const newDelete = todolist.filter((item) => item.id !== id);
     setTodolist(newDelete)
@@ -71,14 +91,13 @@ function App() {
     setTodolist(newList)
   };
   const handleEdit = (id,event) =>{
-
     const newEdit = todolist.filter(item =>{
       if(id === item.id){
         return {...item, name: event};
       }
       return item;
     })
-    console.log(newEdit.name )
+    console.log(newEdit )
     setTodolist(newEdit)
     // const { todolist } = this.state;
     // const newTodolist = todolist.filter(item =>  item.id !== id)
@@ -131,16 +150,12 @@ function App() {
             todolist = {todolist} 
             deleteItem = {deleteItem}
             handleEdit = {handleEdit}
-            filterTodo = {filterTodo}
             />
             <Footer   
             // handleAllClick = {this.handleAllClick}
             // handleActiveClick = {this.handleActiveClick}
             // handleCompletedClick = {this.handleCompletedClick}
             // //CompletedFooter = {CompletedFooter}
-            filter = {filter}
-            //handleFilter = {handleFilter}
-            setFilter = {setFilter}
             deleteAll = {deleteAll}
             todolist = {todolist} 
             />

@@ -38,14 +38,15 @@ function App() {
     //   themeActive: theme.light
     // }
   useEffect(() => {
-    if(filter === newFilter.All){
+    if(filter === "All"){
       setFilterTodo(todolist);
-    }else if(filter === newFilter.Active){
+    }else if(filter === "Active"){
       setFilterTodo(todolist.filter(item => !item.isCompleted));
-    }else if(filter === newFilter.Completed){
+    }else if(filter === "Completed"){
       setFilterTodo(todolist.filter(item => item.isCompleted));
     }
   },[filter,todolist]);
+
   const addItem = (item) => {  
     setTodolist(prevTodolist => [item, ...prevTodolist]);
   }
@@ -138,7 +139,7 @@ function App() {
             // handleActiveClick = {this.handleActiveClick}
             // handleCompletedClick = {this.handleCompletedClick}
             // //CompletedFooter = {CompletedFooter}
-            filter = {filter}
+            filtere = {filter}
             //handleFilter = {handleFilter}
             setFilter = {setFilter}
             deleteAll = {deleteAll}

@@ -1,4 +1,5 @@
 import React, {useRef, useState, useEffect} from 'react'
+import logo from './logo.svg';
 import './App.css';
 
 import Header from './Header';
@@ -20,7 +21,7 @@ export const newFilter = {
 };
 function App() {
   const [todolist, setTodolist] = useState([
-    {id: 1, name: "hoc", isCompleted: true },
+    {id: 1, name: "hoc", isCompleted: false },
     {id: 2, name: "choi", isCompleted: false }
   ]);
   const [filterTodo, setFilterTodo] = useState([]);
@@ -71,14 +72,13 @@ function App() {
     setTodolist(newList)
   };
   const handleEdit = (id,event) =>{
-
     const newEdit = todolist.filter(item =>{
       if(id === item.id){
         return {...item, name: event};
       }
       return item;
     })
-    console.log(newEdit.name )
+    console.log(newEdit )
     setTodolist(newEdit)
     // const { todolist } = this.state;
     // const newTodolist = todolist.filter(item =>  item.id !== id)

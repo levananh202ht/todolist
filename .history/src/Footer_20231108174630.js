@@ -19,12 +19,12 @@ const Footer = ({todolist,filter,deleteAll,setFilter}) => {
                 </button>
                 <button 
                     className={`btn ${filter === newFilter.Active ? "selected" : ''}`}
-                    onClick={() => handleFilter(newFilter.Active)}
+                    onClick={handleFilter}
                 >
                     Active  
                 </button>
                 <button
-                    className={`btn${filter === newFilter.Completed ? "selected" : ''}`}
+                    className={`btn ${filter === newFilter.Completed ? "selected" : ''}`}
                     onClick={() => handleFilter(newFilter.Completed)}
                 >
                     Completed

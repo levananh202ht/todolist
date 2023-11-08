@@ -6,10 +6,10 @@ const Header = ({addItem, todolist}) => {
 
     const inputRef = useRef();
 
-    useEffect(() => {
+    useEffect = () => {
         setValue("");
         inputRef.current.focus();
-    }, [todolist]);
+    }
     const onChangeInput = (event) => {
         setValue(event.target.value);
     }

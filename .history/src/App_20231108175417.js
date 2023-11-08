@@ -41,9 +41,9 @@ function App() {
     if(filter === newFilter.All){
       setFilterTodo(todolist);
     }else if(filter === newFilter.Active){
-      setFilterTodo(todolist.filter(item => !item.isCompleted));
+      setFilterTodo(todolist.map(item => !item.isCompleted));
     }else if(filter === newFilter.Completed){
-      setFilterTodo(todolist.filter(item => item.isCompleted));
+      setFilterTodo(todolist.map(item => item.isCompleted));
     }
   },[filter,todolist]);
   const addItem = (item) => {  

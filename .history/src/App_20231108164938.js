@@ -46,6 +46,7 @@ function App() {
       setFilterTodo(todolist.filter(item => item.isCompleted));
     }
   },[filter,todolist]);
+
   const addItem = (item) => {  
     setTodolist(prevTodolist => [item, ...prevTodolist]);
   }
@@ -71,14 +72,13 @@ function App() {
     setTodolist(newList)
   };
   const handleEdit = (id,event) =>{
-
     const newEdit = todolist.filter(item =>{
       if(id === item.id){
         return {...item, name: event};
       }
       return item;
     })
-    console.log(newEdit.name )
+    console.log(newEdit )
     setTodolist(newEdit)
     // const { todolist } = this.state;
     // const newTodolist = todolist.filter(item =>  item.id !== id)
@@ -138,7 +138,7 @@ function App() {
             // handleActiveClick = {this.handleActiveClick}
             // handleCompletedClick = {this.handleCompletedClick}
             // //CompletedFooter = {CompletedFooter}
-            filter = {filter}
+            filtere = {filtere}
             //handleFilter = {handleFilter}
             setFilter = {setFilter}
             deleteAll = {deleteAll}

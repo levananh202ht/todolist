@@ -3,7 +3,7 @@ import React from 'react';
 import { IoClose } from "react-icons/io5";
 import { IoChevronDown } from "react-icons/io5";
 import { BsPencilFill } from "react-icons/bs";
-const ContentList = ({todolist,isEditing,deleteItem,toggleCompleteStatus, handleEdit}) => {
+const ContentList = ({todolist,isEditing,deleteItem,toggleCompleteStatus}) => {
     return(
         <div className='ContentList'>
             <label className='Click'><IoChevronDown/></label>
@@ -24,7 +24,7 @@ const ContentList = ({todolist,isEditing,deleteItem,toggleCompleteStatus, handle
                                         <div>
                                             <button
                                                 className='updateClick'
-                                                onClick = {() => handleEdit(item.id)}
+                                               // onClick = {() => handleEdit(item.id)}
                                             >
                                                 <BsPencilFill />
                                             </button>

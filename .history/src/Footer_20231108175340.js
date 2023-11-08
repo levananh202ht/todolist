@@ -2,6 +2,8 @@ import React from 'react';
 import propstypes from "prop-types";
 import { newFilter } from './App';
 const Footer = ({todolist,filter,deleteAll,setFilter}) => {
+    debugger
+    const {All,Active,Completed} = newFilter
     const countedLeft = todolist.filter((item) => !item.isCompleted).length;
     const handleFilter = (index) => {
         setFilter(index);
@@ -12,20 +14,20 @@ const Footer = ({todolist,filter,deleteAll,setFilter}) => {
             <p className='iteam' >{countedLeft} iteams left</p>
             <div className='filters'>
                 <button
-                    className={`btn ${filter === newFilter.All ? 'selected' : ''}`}
-                    onClick={() => handleFilter(newFilter.All)}
+                    className={`btn ${filter === All ? 'selected' : ''}`}
+                    onClick={() => handleFilter(All)}
                 >
                     All
                 </button>
                 <button 
-                    className={`btn ${filter === newFilter.Active ? "selected" : ''}`}
-                    onClick={() => handleFilter(newFilter.Active)}
+                    className={`btn ${filter === Active ? "selected" : ''}`}
+                    onClick={() => handleFilter(Active)}
                 >
                     Active  
                 </button>
                 <button
-                    className={`btn${filter === newFilter.Completed ? "selected" : ''}`}
-                    onClick={() => handleFilter(newFilter.Completed)}
+                    className={`btn ${filter === Completed ? "selected" : ''}`}
+                    onClick={() => handleFilter(Completed)}
                 >
                     Completed
                 </button>

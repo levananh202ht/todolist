@@ -42,10 +42,12 @@ function App() {
       setFilterTodo(todolist);
     }else if(filter === newFilter.Active){
       setFilterTodo(todolist.filter(item => !item.isCompleted));
+      debugger
     }else if(filter === newFilter.Completed){
       setFilterTodo(todolist.filter(item => item.isCompleted));
     }
   },[filter,todolist]);
+
   const addItem = (item) => {  
     setTodolist(prevTodolist => [item, ...prevTodolist]);
   }
@@ -138,7 +140,7 @@ function App() {
             // handleActiveClick = {this.handleActiveClick}
             // handleCompletedClick = {this.handleCompletedClick}
             // //CompletedFooter = {CompletedFooter}
-            filter = {filter}
+            filtere = {filter}
             //handleFilter = {handleFilter}
             setFilter = {setFilter}
             deleteAll = {deleteAll}

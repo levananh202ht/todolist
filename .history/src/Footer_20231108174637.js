@@ -24,7 +24,7 @@ const Footer = ({todolist,filter,deleteAll,setFilter}) => {
                     Active  
                 </button>
                 <button
-                    className={`btn${filter === newFilter.Completed ? "selected" : ''}`}
+                    className={`btn ${filter === newFilter.Completed ? "selected" : ''}`}
                     onClick={() => handleFilter(newFilter.Completed)}
                 >
                     Completed

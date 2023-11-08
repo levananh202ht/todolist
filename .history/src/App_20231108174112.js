@@ -46,6 +46,7 @@ function App() {
       setFilterTodo(todolist.filter(item => item.isCompleted));
     }
   },[filter,todolist]);
+  console.log(filter)
   const addItem = (item) => {  
     setTodolist(prevTodolist => [item, ...prevTodolist]);
   }

@@ -1,4 +1,5 @@
 import React, {useRef, useState, useEffect} from 'react'
+import logo from './logo.svg';
 import './App.css';
 
 import Header from './Header';
@@ -20,7 +21,7 @@ export const newFilter = {
 };
 function App() {
   const [todolist, setTodolist] = useState([
-    {id: 1, name: "hoc", isCompleted: true },
+    {id: 1, name: "hoc", isCompleted: false },
     {id: 2, name: "choi", isCompleted: false }
   ]);
   const [filterTodo, setFilterTodo] = useState([]);
@@ -60,6 +61,7 @@ function App() {
     setTodolist(newCompleted)
   };
   const handleFilter = (index) => {
+    debugger
     setFilter(index);
   }
   const deleteItem = (id) => {
@@ -71,14 +73,13 @@ function App() {
     setTodolist(newList)
   };
   const handleEdit = (id,event) =>{
-
     const newEdit = todolist.filter(item =>{
       if(id === item.id){
         return {...item, name: event};
       }
       return item;
     })
-    console.log(newEdit.name )
+    console.log(newEdit )
     setTodolist(newEdit)
     // const { todolist } = this.state;
     // const newTodolist = todolist.filter(item =>  item.id !== id)
@@ -131,7 +132,6 @@ function App() {
             todolist = {todolist} 
             deleteItem = {deleteItem}
             handleEdit = {handleEdit}
-            filterTodo = {filterTodo}
             />
             <Footer   
             // handleAllClick = {this.handleAllClick}
@@ -139,8 +139,7 @@ function App() {
             // handleCompletedClick = {this.handleCompletedClick}
             // //CompletedFooter = {CompletedFooter}
             filter = {filter}
-            //handleFilter = {handleFilter}
-            setFilter = {setFilter}
+            handleFilter = {handleFilter}
             deleteAll = {deleteAll}
             todolist = {todolist} 
             />
