@@ -27,7 +27,7 @@ const ContentList = ({todolist,isEditing,deleteItem,toggleCompleteStatus, handle
                                         <div>
                                             <button
                                                 className='updateClick'
-                                                onClick = {() => handleEdit(item.id)}
+                                                onClick = {(e) => handleEdit(e.target.value)}
                                             >
                                                 <BsPencilFill />
                                             </button>

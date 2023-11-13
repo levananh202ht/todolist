@@ -10,7 +10,8 @@ const ContentList = ({todolist,isEditing,deleteItem,toggleCompleteStatus, handle
             style={{height: "40vh",  overflowY: "auto" }}
         >
             <label className='Click'><IoChevronDown/></label>
-            <ul  className='ContentList_Item'>
+            <ul  className='ContentList_Item' 
+                >
                 {
                     todolist.map((item, index) => {
                         return(

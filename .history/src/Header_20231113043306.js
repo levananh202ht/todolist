@@ -5,6 +5,7 @@ const Header = ({addItem, todolist}) => {
     const [value, setValue] = useState("");
 
     const inputRef = useRef();
+
     const onChangeInput = (event) => {
         setValue(event.target.value);
     }

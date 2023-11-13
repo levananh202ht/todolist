@@ -92,6 +92,10 @@ input:checked + label{
   position: relative;
   font-size: 24px;
 }
+.ContentList_Item{
+  height: "40vh";
+  overflowY: "auto";
+}
 .container .content .ContentList .ContentList_Item .view{
   width: 550px;
   height: 58px;

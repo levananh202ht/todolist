@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 
 const Theme = ({handleTheme}) => {
+    debugger
     return (
         <div className="switch">
             <input 

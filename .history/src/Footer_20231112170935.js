@@ -1,7 +1,7 @@
 import React from 'react';
 import propstypes from "prop-types";
 import { newFilter } from './App';
-const Footer = ({todolist,renderFilter, deleteAll}) => {
+const Footer = ({todolist,renderFilter, deleteAll,handleAll,handleActive,handleCompleted}) => {
     const countedLeft = todolist.filter((item) => !item.isCompleted).length;
     return(            
         <div className='Footer'>
@@ -9,7 +9,7 @@ const Footer = ({todolist,renderFilter, deleteAll}) => {
             <div className='filters'>
                 <button
                     //className={`btn ${filterFunction === newFilter.All ? 'selected' : ''}`}
-                    onClick={() => renderFilter(newFilter.All)}
+                    onClick={() => handleAll(newFilter.All)}
                 >
                     All
                 </button>
@@ -21,7 +21,7 @@ const Footer = ({todolist,renderFilter, deleteAll}) => {
                 </button>
                 <button
                     //className={`btn${filterFunction === newFilter.Completed ? "selected" : ''}`}
-                    onClick={() => renderFilter(newFilter.Completed)}
+                    onClick={() => handleCompleted(newFilter.Completed)}
                 >
                     Completed
                 </button>

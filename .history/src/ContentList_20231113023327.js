@@ -3,12 +3,9 @@ import React from 'react';
 import { IoClose } from "react-icons/io5";
 import { IoChevronDown } from "react-icons/io5";
 import { BsPencilFill } from "react-icons/bs";
-const ContentList = ({todolist,isEditing,deleteItem,toggleCompleteStatus, handleEdit,onScroll}) => {
+const ContentList = ({todolist,isEditing,deleteItem,toggleCompleteStatus, handleEdit,handlePagination}) => {
     return(
-        <div className='ContentList'
-            onScroll={onScroll}
-            style={{height: "40vh",  overflowY: "auto" }}
-        >
+        <div className='ContentList' >
             <label className='Click'><IoChevronDown/></label>
             <ul  className='ContentList_Item'>
                 {
@@ -22,6 +19,7 @@ const ContentList = ({todolist,isEditing,deleteItem,toggleCompleteStatus, handle
                                         type='checkbox'  
                                         checked = {item.isCompleted} 
                                         onChange = {() => toggleCompleteStatus(item.id)}
+                                        onChange={handlePagination}
                                         />
                                         <label   checked = {todolist.isCompleted} className='view_item' > {item.name}</label>    
                                         <div>

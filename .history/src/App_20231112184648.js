@@ -23,16 +23,12 @@ function App() {
     {id: 1, name: "hoc", isCompleted: true },
     {id: 2, name: "choi", isCompleted: false }
   ]);
-  const [input, setInput] = useState("");
-  const [edit, setEdit] = useState(false);
   const [filterTodo, setFilterTodo] = useState(newFilter.All);
   const [ themeActive, setThemeActive] = useState(theme.light);
-  const [currPage, setCurrPage] = useState(1);
   const headerRef = useRef();
-  const numberTodolist = useRef();
 
   const addItem = (item) => {  
-      setTodolist([item, ...todolist]);
+    setTodolist(prevTodolist => [item, ...prevTodolist]);
   }
   
   const toggleCompleteStatus = (id) => {
@@ -54,7 +50,6 @@ function App() {
   };
 
   const renderFilter = (todolist, filterTodo) => {
-    debugger
     switch (filterTodo) {
       case newFilter.All:
         setFilterTodo(todolist);
@@ -69,17 +64,16 @@ function App() {
     }
   }
 
-  const handleEdit = (id) =>{
+  const handleEdit = (id,event) =>{
 
-    const newEdit = todolist.filter((item) => {
-      if(item.id === id){
-        item.name = input
+    const newEdit = todolist.filter(item =>{
+      if(id === item.id){
+        return {...item, name: event};
       }
       return item;
-    } );
-    setEdit(true)
-    setInput("")
-    console.log(newEdit )
+    })
+    console.log(newEdit.name )
+    setTodolist(newEdit)
     // const { todolist } = this.state;
     // const newTodolist = todolist.filter(item =>  item.id !== id)
     // const newEdit = todolist.find(item =>  item.id === id)
@@ -112,14 +106,6 @@ function App() {
       setThemeActive(theme.dark);
     }
   }
-  const onScroll = () => {
-    if (numberTodolist.current) {
-      const { scrollTop, scrollHeight, clientHeight } = numberTodolist.current;
-      if (scrollTop + clientHeight === scrollHeight) {
-        setCurrPage(currPage + 1);
-      }
-    }
-  }
   return(
     <ThemeContext.Provider >
       <div className='container'>
@@ -129,8 +115,6 @@ function App() {
             <Theme handleTheme={handleTheme} />
             <Header ref={headerRef} addItem={addItem}  />
             <ContentList 
-            onScroll={onScroll}
-            numberTodolist={numberTodolist.current}
             toggleCompleteStatus={toggleCompleteStatus}
             todolist={todolist} 
             deleteItem={deleteItem}

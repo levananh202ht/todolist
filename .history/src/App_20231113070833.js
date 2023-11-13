@@ -32,7 +32,7 @@ function App() {
   const numberTodolist = useRef();
 
   const addItem = (item) => {  
-      setTodolist([item, ...todolist]);
+      setTodolist(prevTodolist => [item, ...prevTodolist]);
   }
   
   const toggleCompleteStatus = (id) => {
@@ -70,7 +70,6 @@ function App() {
   }
 
   const handleEdit = (id) =>{
-
     const newEdit = todolist.filter((item) => {
       if(item.id === id){
         item.name = input

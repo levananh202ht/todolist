@@ -1,6 +1,7 @@
-import React,{useState} from "react";
+import React,{} from "react";
 
-const Theme = ({handleTheme}) => {
+const Theme = (handleTheme) => {
+    debugger
     return (
         <div className="switch">
             <input 

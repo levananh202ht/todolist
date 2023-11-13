@@ -70,7 +70,7 @@ function App() {
   }
 
   const handleEdit = (id) =>{
-
+    headerRef.current.focusInput();
     const newEdit = todolist.filter((item) => {
       if(item.id === id){
         item.name = input

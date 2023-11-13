@@ -5,12 +5,10 @@ import { IoChevronDown } from "react-icons/io5";
 import { BsPencilFill } from "react-icons/bs";
 const ContentList = ({todolist,isEditing,deleteItem,toggleCompleteStatus, handleEdit,onScroll}) => {
     return(
-        <div className='ContentList'
-            onScroll={onScroll}
-            style={{height: "40vh",  overflowY: "auto" }}
-        >
+        <div className='ContentList' >
             <label className='Click'><IoChevronDown/></label>
-            <ul  className='ContentList_Item'>
+            <ul  className='ContentList_Item' onScroll={onScroll}
+                //style={{ height: "auto", overflowY: "auto" }}>
                 {
                     todolist.map((item, index) => {
                         return(

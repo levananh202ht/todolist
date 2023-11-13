@@ -1,7 +1,7 @@
 import React from 'react';
 import propstypes from "prop-types";
 import { newFilter } from './App';
-const Footer = ({todolist,renderFilter, deleteAll}) => {
+const Footer = ({todolist,renderFilter, deleteAll,handleAll,handleActive,handleCompleted}) => {
     const countedLeft = todolist.filter((item) => !item.isCompleted).length;
     return(            
         <div className='Footer'>

@@ -5,8 +5,14 @@ const Header = ({addItem, todolist}) => {
     const [value, setValue] = useState("");
 
     const inputRef = useRef();
+
+    useEffect(() => {
+        setValue("");
+        inputRef.current.focus();
+    }, [todolist]);
     const onChangeInput = (event) => {
         setValue(event.target.value);
+        event.target.value = '';
     }
     const handlekeyDown = (event) => {
         if(event.key === "Enter"){
@@ -14,7 +20,6 @@ const Header = ({addItem, todolist}) => {
                 const items = {id: Math.random(), name: value.trim(), isCompleted: false};
                 addItem(items)
                 setValue("");
-                event.target.value = '';
             }
         }
     }  

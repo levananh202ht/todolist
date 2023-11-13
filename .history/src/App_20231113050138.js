@@ -23,7 +23,7 @@ function App() {
     {id: 1, name: "hoc", isCompleted: true },
     {id: 2, name: "choi", isCompleted: false }
   ]);
-  const [input, setInput] = useState("");
+  const [items, setItems] = useState("");
   const [edit, setEdit] = useState(false);
   const [filterTodo, setFilterTodo] = useState(newFilter.All);
   const [ themeActive, setThemeActive] = useState(theme.light);
@@ -32,7 +32,7 @@ function App() {
   const numberTodolist = useRef();
 
   const addItem = (item) => {  
-      setTodolist([item, ...todolist]);
+    setTodolist(prevTodolist => [item, ...prevTodolist]);
   }
   
   const toggleCompleteStatus = (id) => {
@@ -70,15 +70,11 @@ function App() {
   }
 
   const handleEdit = (id) =>{
-
-    const newEdit = todolist.filter((item) => {
-      if(item.id === id){
-        item.name = input
-      }
-      return item;
-    } );
+    const newEdit = todolist.find((item) => {
+      return item.id === id
+    })
     setEdit(true)
-    setInput("")
+    setItems(newEdit.items)
     console.log(newEdit )
     // const { todolist } = this.state;
     // const newTodolist = todolist.filter(item =>  item.id !== id)

@@ -1,6 +1,6 @@
-import React,{useState} from "react";
+import React,{} from "react";
 
-const Theme = ({handleTheme}) => {
+const Theme = (handleTheme) => {
     return (
         <div className="switch">
             <input 

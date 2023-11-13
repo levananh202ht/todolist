@@ -70,7 +70,6 @@ function App() {
   }
 
   const handleEdit = (id) =>{
-
     const newEdit = todolist.filter((item) => {
       if(item.id === id){
         item.name = input

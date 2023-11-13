@@ -23,16 +23,22 @@ function App() {
     {id: 1, name: "hoc", isCompleted: true },
     {id: 2, name: "choi", isCompleted: false }
   ]);
-  const [input, setInput] = useState("");
-  const [edit, setEdit] = useState(false);
-  const [filterTodo, setFilterTodo] = useState(newFilter.All);
+  const [filterTodo, setFilterTodo] = useState([]);
+  const [filter, setFilter] = useState(newFilter.All);
   const [ themeActive, setThemeActive] = useState(theme.light);
-  const [currPage, setCurrPage] = useState(1);
   const headerRef = useRef();
-  const numberTodolist = useRef();
 
+  useEffect(() => {
+    if(filter === newFilter.All){
+      setFilterTodo(todolist);
+    }else if(filter === newFilter.Active){
+      setFilterTodo(todolist.filter(item => !item.isCompleted));
+    }else if(filter === newFilter.Completed){
+      setFilterTodo(todolist.filter(item => item.isCompleted));
+    }
+  },[filter,todolist]);
   const addItem = (item) => {  
-      setTodolist([item, ...todolist]);
+    setTodolist(prevTodolist => [item, ...prevTodolist]);
   }
   
   const toggleCompleteStatus = (id) => {
@@ -44,6 +50,9 @@ function App() {
     })
     setTodolist(newCompleted)
   };
+  const handleFilter = (index) => {
+    setFilter(index);
+  }
   const deleteItem = (id) => {
     const newDelete = todolist.filter((item) => item.id !== id);
     setTodolist(newDelete)
@@ -52,34 +61,16 @@ function App() {
     const newList = todolist.filter((item) => !item.isCompleted)
     setTodolist(newList)
   };
+  const handleEdit = (id,event) =>{
 
-  const renderFilter = (todolist, filterTodo) => {
-    debugger
-    switch (filterTodo) {
-      case newFilter.All:
-        setFilterTodo(todolist);
-        break;
-      case newFilter.Active:        setFilterTodo(todolist.filter(item => item.isCompleted === true));  
-        break;
-      case newFilter.Completed:
-        setFilterTodo(todolist.filter(item => !item.isCompleted === true));
-        break;
-      default:
-        break;
-    }
-  }
-
-  const handleEdit = (id) =>{
-
-    const newEdit = todolist.filter((item) => {
-      if(item.id === id){
-        item.name = input
+    const newEdit = todolist.filter(item =>{
+      if(id === item.id){
+        return {...item, name: event};
       }
       return item;
-    } );
-    setEdit(true)
-    setInput("")
-    console.log(newEdit )
+    })
+    console.log(newEdit.name )
+    setTodolist(newEdit)
     // const { todolist } = this.state;
     // const newTodolist = todolist.filter(item =>  item.id !== id)
     // const newEdit = todolist.find(item =>  item.id === id)
@@ -103,21 +94,17 @@ function App() {
     // })
   }
   const handleTheme = () => {
+    debugger
     if(themeActive === theme.dark) {
+      debugger
       document.documentElement.setAttribute('data-theme', 'light');
       setThemeActive(theme.light);
+      debugger
     }
     else {
       document.documentElement.setAttribute('data-theme', 'dark');
       setThemeActive(theme.dark);
-    }
-  }
-  const onScroll = () => {
-    if (numberTodolist.current) {
-      const { scrollTop, scrollHeight, clientHeight } = numberTodolist.current;
-      if (scrollTop + clientHeight === scrollHeight) {
-        setCurrPage(currPage + 1);
-      }
+      debugger
     }
   }
   return(
@@ -127,10 +114,9 @@ function App() {
         <div className='main'>
           <div className='content'>
             <Theme handleTheme={handleTheme} />
-            <Header ref={headerRef} addItem={addItem}  />
+            {/* <Header ref={this.headerRef} addItem = {this.addItem} todolist = {todolist} updateItem ={this.updateItem} />  */}
+            <Header addItem={addItem}  />
             <ContentList 
-            onScroll={onScroll}
-            numberTodolist={numberTodolist.current}
             toggleCompleteStatus={toggleCompleteStatus}
             todolist={todolist} 
             deleteItem={deleteItem}
@@ -138,7 +124,13 @@ function App() {
             filterTodo={filterTodo}
             />
             <Footer   
-            renderFilter={renderFilter}
+            // handleAllClick = {this.handleAllClick}
+            // handleActiveClick = {this.handleActiveClick}
+            // handleCompletedClick = {this.handleCompletedClick}
+            // //CompletedFooter = {CompletedFooter}
+            filter={filter}
+            //handleFilter = {handleFilter}
+            setFilter={setFilter}
             deleteAll={deleteAll}
             todolist={todolist} 
             />
