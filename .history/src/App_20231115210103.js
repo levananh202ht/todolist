@@ -119,13 +119,12 @@ function App() {
   }
   useEffect(() => {
     if (numberTodolist.current) {
-      numberTodolist.current('scroll', onScroll);
-      debugger
+      numberTodolist.current.addEventListener('scroll', onScroll);
     }
     
     return () => {
       if (numberTodolist.current) {
-        numberTodolist.current('scroll', onScroll);
+        numberTodolist.current.removeEventListener('scroll', onScroll);
       }
     };
   }, [ currPage]); 

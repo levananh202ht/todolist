@@ -11,7 +11,7 @@ const ContentList = ({todolist,isEditing,deleteItem,toggleCompleteStatus, handle
             <label className='Click'><IoChevronDown/></label>
             <ul  className='ContentList_Item' 
                 onScroll={onScroll}
-                style={{height: "40vh",  overflowY: "scroll" }}
+                style={{height: "40vh",  overflowY: "auto" }}
             >
                 {
                     todolist.map((item, index) => {

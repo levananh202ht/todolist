@@ -29,7 +29,7 @@ function App() {
   const [ themeActive, setThemeActive] = useState(theme.light);
   const [currPage, setCurrPage] = useState(1);
   const headerRef = useRef(null);
-  const numberTodolist = useRef();
+  const numberTodolist = useRef(5);
   
   
   useEffect(() => setFilterTodo(todolist) ,[todolist])
@@ -117,20 +117,19 @@ function App() {
       setThemeActive(theme.dark);
     }
   }
-  useEffect(() => {
-    if (numberTodolist.current) {
-      numberTodolist.current('scroll', onScroll);
-      debugger
-    }
+  // useEffect(() => {
+  //   if (numberTodolist.current) {
+  //     numberTodolist.current.addEventListener('scroll', onScroll);
+  //   }
     
-    return () => {
-      if (numberTodolist.current) {
-        numberTodolist.current('scroll', onScroll);
-      }
-    };
-  }, [ currPage]); 
+  //   return () => {
+  //     if (numberTodolist.current) {
+  //       numberTodolist.current.removeEventListener('scroll', onScroll);
+  //     }
+  //   };
+  // }, [numberTodolist, currPage]); 
   const onScroll = () => {
-    
+    debugger
     if (numberTodolist.current) {
       debugger
       const { scrollTop, scrollHeight, clientHeight } = numberTodolist.current;
@@ -151,6 +150,7 @@ function App() {
             <ContentList 
             ref={numberTodolist}
             onScroll={onScroll}
+            numberTodolist={numberTodolist.current}
             toggleCompleteStatus={toggleCompleteStatus}
             todolist={filterTodo} 
             deleteItem={deleteItem}

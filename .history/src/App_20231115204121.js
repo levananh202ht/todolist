@@ -30,7 +30,7 @@ function App() {
   const [currPage, setCurrPage] = useState(1);
   const headerRef = useRef(null);
   const numberTodolist = useRef();
-  
+  debugger
   
   useEffect(() => setFilterTodo(todolist) ,[todolist])
   
@@ -119,18 +119,17 @@ function App() {
   }
   useEffect(() => {
     if (numberTodolist.current) {
-      numberTodolist.current('scroll', onScroll);
-      debugger
+      numberTodolist.current.addEventListener('scroll', onScroll);
     }
     
     return () => {
       if (numberTodolist.current) {
-        numberTodolist.current('scroll', onScroll);
+        numberTodolist.current.removeEventListener('scroll', onScroll);
       }
     };
-  }, [ currPage]); 
+  }, [numberTodolist, currPage]); 
   const onScroll = () => {
-    
+    debugger
     if (numberTodolist.current) {
       debugger
       const { scrollTop, scrollHeight, clientHeight } = numberTodolist.current;
@@ -149,8 +148,9 @@ function App() {
             <Theme handleTheme={handleTheme} />
             <Header ref={headerRef} addItem={addItem}  />
             <ContentList 
-            ref={numberTodolist}
+            ref={headerRef}
             onScroll={onScroll}
+            numberTodolist={numberTodolist}
             toggleCompleteStatus={toggleCompleteStatus}
             todolist={filterTodo} 
             deleteItem={deleteItem}

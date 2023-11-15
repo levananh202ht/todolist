@@ -120,7 +120,6 @@ function App() {
   useEffect(() => {
     if (numberTodolist.current) {
       numberTodolist.current('scroll', onScroll);
-      debugger
     }
     
     return () => {

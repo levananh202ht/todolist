@@ -6,12 +6,12 @@ import { BsPencilFill } from "react-icons/bs";
 const ContentList = ({todolist,isEditing,deleteItem,toggleCompleteStatus, handleEdit,onScroll,hanlSubmit,numberTodolist}) => {
     return(
         <div className='ContentList'
-        ref={numberTodolist}
         >
             <label className='Click'><IoChevronDown/></label>
             <ul  className='ContentList_Item' 
                 onScroll={onScroll}
-                style={{height: "40vh",  overflowY: "scroll" }}
+                ref={numberTodolist}
+                style={{height: "40vh",  overflowY: "auto" }}
             >
                 {
                     todolist.map((item, index) => {
