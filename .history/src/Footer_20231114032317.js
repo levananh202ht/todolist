@@ -1,29 +1,27 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import propstypes from "prop-types";
 import { newFilter } from './App';
-
 const Footer = ({todolist,renderFilter, deleteAll}) => {
     const countedLeft = todolist.filter((item) => !item.isCompleted).length;
-
 
     return(            
         <div className='Footer'>
             <p className='iteam' >{countedLeft} iteams left</p>
             <div className='filters'>
                 <button
-                   // className={`btn ${status === newFilter.All ? 'selected' : ''}`}
+                    //className={`btn ${filterFunction === newFilter.All ? 'selected' : ''}`}
                     onClick={() => renderFilter(newFilter.All)}
                 >
                     All
                 </button>
                 <button 
-                   // className={`btn ${status === newFilter.Active ? "selected" : ''}`}
-                    onClick={() => {renderFilter(newFilter.Active)}}
+                    //className={`btn ${filterFunction === newFilter.Active ? "selected" : ''}`}
+                    onClick={() => renderFilter(newFilter.Active)}
                 >
                     Active  
                 </button>
                 <button
-                    //className={`btn${status === newFilter.Completed ? "selected" : ''}`}
+                    //className={`btn${filterFunction === newFilter.Completed ? "selected" : ''}`}
                     onClick={() => renderFilter(newFilter.Completed)}
                 >
                     Completed
@@ -37,5 +35,12 @@ const Footer = ({todolist,renderFilter, deleteAll}) => {
         </div>
     )
 }
-
+Footer.propTypes = {
+    todoList: propstypes.array,
+    CompletedFooter: propstypes.string,
+    deleteAll: propstypes.func,
+    handleCompletedClick: propstypes.string,
+    handleActiveClick: propstypes.func.isRequired,
+    handleAllClick: propstypes.func.isRequired,
+};
 export default Footer;

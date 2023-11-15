@@ -15,8 +15,8 @@ const theme = {
 }
 export const newFilter = {
   All: "All",
-  Active: "Active",
-  Completed: "Completed",
+  Active: false,
+  Completed: true,
 };
 function App() {
   const [todolist, setTodolist] = useState([
@@ -25,14 +25,12 @@ function App() {
   ]);
   const [input, setInput] = useState("");
   const [filterTodo, setFilterTodo] = useState([]);
- //const [selectItem, setSelectItem] = useState(null)
   const [ themeActive, setThemeActive] = useState(theme.light);
   const [currPage, setCurrPage] = useState(1);
-  const headerRef = useRef(null);
+  const headerRef = useRef();
   const numberTodolist = useRef();
   
   useEffect(() => setFilterTodo(todolist) ,[todolist])
-  
   const addItem = (item) => {  
       setTodolist([item, ...todolist]);
   }
@@ -58,10 +56,11 @@ function App() {
     
     switch (newww) {
       case newFilter.All:
-        setFilterTodo(todolist)
+        setFilterTodo(todolist )
         break;
       case newFilter.Active:       
       setFilterTodo(todolist.filter((item) => !item.isCompleted));  
+      debugger
         break;
       case newFilter.Completed:
         setFilterTodo(todolist.filter((item) => item.isCompleted));
@@ -71,19 +70,18 @@ function App() {
         break;
     }
   }
-  // const hanlSubmit = (e) => {
-  //   e.preventDefault();
-  //   if(input!==""){
-  //     setFilterTodo([{id: `${input}-${Date.now()}`, input},...filterTodo])
 
-  //     setInput("")
-  //   }
-  // }
+
   const handleEdit = (id) =>{
 
-    const newEdit = todolist.find((item) => item.id === id);
-    setInput(newEdit[0]);
-    console.log(newEdit.name )
+    const newEdit = todolist.filter((item) => {
+      if(item.id === id){
+        item.name = input
+      }
+      return item;
+    } );
+    setInput("")
+    console.log(newEdit )
     // const { todolist } = this.state;
     // const newTodolist = todolist.filter(item =>  item.id !== id)
     // const newEdit = todolist.find(item =>  item.id === id)
@@ -116,23 +114,10 @@ function App() {
       setThemeActive(theme.dark);
     }
   }
-  useEffect(() => {
-    if (numberTodolist.current) {
-      numberTodolist.current.addEventListener('scroll', onScroll);
-    }
-    
-    return () => {
-      if (numberTodolist.current) {
-        numberTodolist.current.removeEventListener('scroll', onScroll);
-      }
-    };
-  }, [numberTodolist, currPage]); 
   const onScroll = () => {
-    debugger
     if (numberTodolist.current) {
       debugger
       const { scrollTop, scrollHeight, clientHeight } = numberTodolist.current;
-      debugger
       if (scrollTop + clientHeight === scrollHeight) {
         setCurrPage(currPage + 1);
       }
@@ -150,15 +135,15 @@ function App() {
             onScroll={onScroll}
             numberTodolist={numberTodolist.current}
             toggleCompleteStatus={toggleCompleteStatus}
-            todolist={filterTodo} 
+            todolist={todolist} 
             deleteItem={deleteItem}
             handleEdit={handleEdit}
-           // hanlSubmit={hanlSubmit}
+
             />
             <Footer   
             renderFilter={renderFilter}
             deleteAll={deleteAll}
-            todolist={filterTodo} 
+            todolist={todolist} 
             />
           </div>
         </div>

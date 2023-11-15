@@ -128,9 +128,9 @@ function App() {
     };
   }, [numberTodolist, currPage]); 
   const onScroll = () => {
-    debugger
+  
     if (numberTodolist.current) {
-      debugger
+  
       const { scrollTop, scrollHeight, clientHeight } = numberTodolist.current;
       debugger
       if (scrollTop + clientHeight === scrollHeight) {

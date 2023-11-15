@@ -25,10 +25,10 @@ function App() {
   ]);
   const [input, setInput] = useState("");
   const [filterTodo, setFilterTodo] = useState([]);
- //const [selectItem, setSelectItem] = useState(null)
+  const [selectItem, setSelectItem] = useState(null)
   const [ themeActive, setThemeActive] = useState(theme.light);
   const [currPage, setCurrPage] = useState(1);
-  const headerRef = useRef(null);
+  const headerRef = useRef();
   const numberTodolist = useRef();
   
   useEffect(() => setFilterTodo(todolist) ,[todolist])
@@ -71,18 +71,13 @@ function App() {
         break;
     }
   }
-  // const hanlSubmit = (e) => {
-  //   e.preventDefault();
-  //   if(input!==""){
-  //     setFilterTodo([{id: `${input}-${Date.now()}`, input},...filterTodo])
-
-  //     setInput("")
-  //   }
-  // }
+  useEffect(() => {
+    headerRef.current.focus()
+  }, [headerRef])
   const handleEdit = (id) =>{
 
     const newEdit = todolist.find((item) => item.id === id);
-    setInput(newEdit[0]);
+    setInput(newEdit.name)
     console.log(newEdit.name )
     // const { todolist } = this.state;
     // const newTodolist = todolist.filter(item =>  item.id !== id)
@@ -116,23 +111,10 @@ function App() {
       setThemeActive(theme.dark);
     }
   }
-  useEffect(() => {
-    if (numberTodolist.current) {
-      numberTodolist.current.addEventListener('scroll', onScroll);
-    }
-    
-    return () => {
-      if (numberTodolist.current) {
-        numberTodolist.current.removeEventListener('scroll', onScroll);
-      }
-    };
-  }, [numberTodolist, currPage]); 
   const onScroll = () => {
-    debugger
     if (numberTodolist.current) {
       debugger
       const { scrollTop, scrollHeight, clientHeight } = numberTodolist.current;
-      debugger
       if (scrollTop + clientHeight === scrollHeight) {
         setCurrPage(currPage + 1);
       }
@@ -153,7 +135,7 @@ function App() {
             todolist={filterTodo} 
             deleteItem={deleteItem}
             handleEdit={handleEdit}
-           // hanlSubmit={hanlSubmit}
+
             />
             <Footer   
             renderFilter={renderFilter}

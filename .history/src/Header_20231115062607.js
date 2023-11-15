@@ -2,12 +2,13 @@ import React, { useState, useRef,useEffect } from 'react'
 
 
 const Header = ({addItem, todolist}) => {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState("");
 
     const inputRef = useRef(null);
 
-    useEffect(() => {    
-        inputRef.current.focus();
+    useEffect(() => {
+        debugger
+        inputRef.current.focus()
     })
     const onChangeInput = (event) => {
         setValue(event.target.value);

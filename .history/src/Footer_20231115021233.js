@@ -4,7 +4,7 @@ import { newFilter } from './App';
 
 const Footer = ({todolist,renderFilter, deleteAll}) => {
     const countedLeft = todolist.filter((item) => !item.isCompleted).length;
-
+    const [status, setStatus] = useState(newFilter.All);
 
     return(            
         <div className='Footer'>

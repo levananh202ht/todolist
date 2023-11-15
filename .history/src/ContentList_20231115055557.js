@@ -3,11 +3,10 @@ import React from 'react';
 import { IoClose } from "react-icons/io5";
 import { IoChevronDown } from "react-icons/io5";
 import { BsPencilFill } from "react-icons/bs";
-const ContentList = ({todolist,isEditing,deleteItem,toggleCompleteStatus, handleEdit,onScroll,hanlSubmit,numberTodolist}) => {
+const ContentList = ({todolist,isEditing,deleteItem,toggleCompleteStatus, handleEdit,onScroll,hanlSubmit}) => {
     return(
         <div className='ContentList'
             onScroll={onScroll}
-            ref={numberTodolist}
             style={{height: "40vh",  overflowY: "auto" }}
         >
             <label className='Click'><IoChevronDown/></label>

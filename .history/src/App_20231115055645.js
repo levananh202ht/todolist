@@ -71,18 +71,18 @@ function App() {
         break;
     }
   }
-  // const hanlSubmit = (e) => {
-  //   e.preventDefault();
-  //   if(input!==""){
-  //     setFilterTodo([{id: `${input}-${Date.now()}`, input},...filterTodo])
-
-  //     setInput("")
-  //   }
-  // }
+  const hanlSubmit = (e) => {
+    e.preventDefault();
+    if(input!==""){
+      setFilterTodo([{id: `${input}-${Date.now()}`, input},...filterTodo])
+      debugger
+      setInput("")
+    }
+  }
   const handleEdit = (id) =>{
 
     const newEdit = todolist.find((item) => item.id === id);
-    setInput(newEdit[0]);
+    setInput(newEdit.input)
     console.log(newEdit.name )
     // const { todolist } = this.state;
     // const newTodolist = todolist.filter(item =>  item.id !== id)
@@ -116,23 +116,10 @@ function App() {
       setThemeActive(theme.dark);
     }
   }
-  useEffect(() => {
-    if (numberTodolist.current) {
-      numberTodolist.current.addEventListener('scroll', onScroll);
-    }
-    
-    return () => {
-      if (numberTodolist.current) {
-        numberTodolist.current.removeEventListener('scroll', onScroll);
-      }
-    };
-  }, [numberTodolist, currPage]); 
   const onScroll = () => {
-    debugger
     if (numberTodolist.current) {
       debugger
       const { scrollTop, scrollHeight, clientHeight } = numberTodolist.current;
-      debugger
       if (scrollTop + clientHeight === scrollHeight) {
         setCurrPage(currPage + 1);
       }
@@ -153,7 +140,7 @@ function App() {
             todolist={filterTodo} 
             deleteItem={deleteItem}
             handleEdit={handleEdit}
-           // hanlSubmit={hanlSubmit}
+            hanlSubmit={hanlSubmit}
             />
             <Footer   
             renderFilter={renderFilter}
