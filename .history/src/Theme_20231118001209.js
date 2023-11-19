@@ -1,14 +1,14 @@
-import React,{useState} from 'react';
+import React,{useState} from "react";
 
-import ThemeContext from './ThemeContext'
+//import ThemeContext from './ThemeContext'
 const Theme = () => {
-    const { handleTheme} = useState(ThemeContext)
+    //const {theme, handleTheme} = useState(ThemeContext)
     return (
         <div className="switch">
             <input 
                 className="Theme"
                 type="checkbox"
-                onChange={handleTheme}
+                //onChange={handleTheme}
             />
             <span className="slider round" />
         </div>

@@ -5,10 +5,14 @@ import Header from './Header';
 import ContentList from './ContentList';
 import Footer from './Footer';
 import Theme from './Theme'
-import {ThemeContext} from './ThemeContext'
 
 
+const ThemeContext = React.createContext();
 
+const theme = {
+  light: "light",
+  dark: "dark"
+}
 export const newFilter = {
   All: "All",
   Active: "Active",
@@ -22,6 +26,7 @@ function App() {
   const [input, setInput] = useState("");
   const [filterTodo, setFilterTodo] = useState([]);
  //const [selectItem, setSelectItem] = useState(null)
+  const [ themeActive, setThemeActive] = useState(theme.light);
   const [currPage, setCurrPage] = useState(1);
   const headerRef = useRef(null);
   const numberTodolist = useRef();
@@ -67,38 +72,84 @@ function App() {
         break;
     }
   }
+  // const hanlSubmit = (e) => {
+  //   e.preventDefault();
+  //   if(input!==""){
+  //     setFilterTodo([{id: `${input}-${Date.now()}`, input},...filterTodo])
 
+  //     setInput("")
+  //   }
+  // }
   const handleEdit = (id) =>{
-    const newEdit = todolist.find(item => item.id === id)
-    setInput(newEdit.name)
+
+    const newEdit = todolist.find((item) => item.id === id);
+    setInput(newEdit[0]);
+    console.log(newEdit.name )
+    // const { todolist } = this.state;
+    // const newTodolist = todolist.filter(item =>  item.id !== id)
+    // const newEdit = todolist.find(item =>  item.id === id)
+    // console.log(newEdit.name);
+    // this.setState({
+    //   //todolist: newTodolist,
+    //   value: newEdit.name
+    // })
+    // this.headerRef.current.focusInput(newEdit.name);
+    // const newUpdate = todolist.map((item) => {
+    //   if (item.id === id) {
+    //     console.log(item)
+    //     return {
+    //       ...item,
+    //     };
+    //   }
+    //   return item;
+    // })
+    // this.setState({
+    //   todolist:newUpdate
+    // })
   }
-  
-
+  const handleTheme = () => {
+    if(themeActive === theme.dark) {
+      document.documentElement.setAttribute('data-theme', 'light');
+      setThemeActive(theme.light);
+    }
+    else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      setThemeActive(theme.dark);
+    }
+  }
   useEffect(() => {
-    window.addEventListener('scroll', onScroll);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-    };
-  }, [currPage]);
-
-  const onScroll = () => {
-    
     if (numberTodolist.current) {
+      numberTodolist.current('scroll', onScroll);
+      debugger
+    }
+    
+    return () => {
+      if (numberTodolist.current) {
+        numberTodolist.current('scroll', onScroll);
+      }
+    };
+  }, [ currPage]); 
+  const onScroll = () => {
+    debugger
+    if (numberTodolist.current) {
+      debugger
       const { scrollTop, scrollHeight, clientHeight } = numberTodolist.current;
+      debugger
       if (scrollTop + clientHeight === scrollHeight) {
         setCurrPage(currPage + 1);
       }
     }
   }
   return(
+    <ThemeContext.Provider >
       <div className='container'>
         <h1>todos</h1>
         <div className='main'>
           <div className='content'>
-            <Theme />
+            <Theme handleTheme={handleTheme} />
             <Header ref={headerRef} addItem={addItem}  />
             <ContentList 
-            numberTodolist={numberTodolist}
+            numberTodolist={numberTodolist.current}
             onScroll={onScroll}
             toggleCompleteStatus={toggleCompleteStatus}
             todolist={filterTodo} 
@@ -114,6 +165,7 @@ function App() {
           </div>
         </div>
       </div>
+    </ThemeContext.Provider>
   )
 }
 export default App;

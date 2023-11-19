@@ -1,8 +1,8 @@
-import React,{useState} from 'react';
+import React,{useState} from "react";
 
 import ThemeContext from './ThemeContext'
 const Theme = () => {
-    const { handleTheme} = useState(ThemeContext)
+    const {theme, handleTheme} = useState(ThemeContext)
     return (
         <div className="switch">
             <input 

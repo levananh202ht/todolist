@@ -68,9 +68,9 @@ function App() {
     }
   }
 
-  const handleEdit = (id) =>{
-    const newEdit = todolist.find(item => item.id === id)
-    setInput(newEdit.name)
+  const handleEdit = (e) =>{
+    debugger
+    setFilterTodo({...filterTodo, name :e.target.value})
   }
   
 

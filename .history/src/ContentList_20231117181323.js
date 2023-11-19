@@ -3,14 +3,14 @@ import React from 'react';
 import { IoClose } from "react-icons/io5";
 import { IoChevronDown } from "react-icons/io5";
 import { BsPencilFill } from "react-icons/bs";
-const ContentList = ({todolist,isEditing,deleteItem,toggleCompleteStatus, handleEdit,onScroll,filterTodo,numberTodolist}) => {
+const ContentList = ({todolist,isEditing,deleteItem,toggleCompleteStatus, handleEdit,onScroll,hanlSubmit,numberTodolist}) => {
     return(
         <div className='ContentList'
         ref={numberTodolist}
         >
             <label className='Click'><IoChevronDown/></label>
             <ul  className='ContentList_Item' 
-                onScroll={onScroll}
+                //onScroll={onScroll}
                 style={{height: "40vh",  overflowY: "scroll" }}
             >
                 {
@@ -29,8 +29,8 @@ const ContentList = ({todolist,isEditing,deleteItem,toggleCompleteStatus, handle
                                         <div>
                                             <button
                                                 className='updateClick'
-                                                //value={filterTodo.text}
-                                                onClick = {() => handleEdit(item.id)}                                               
+                                                onClick = {() => handleEdit(item.id)}
+                                                onSubmit={hanlSubmit}
                                             >
                                                 <BsPencilFill />
                                             </button>

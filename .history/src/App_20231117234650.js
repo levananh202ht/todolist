@@ -5,7 +5,6 @@ import Header from './Header';
 import ContentList from './ContentList';
 import Footer from './Footer';
 import Theme from './Theme'
-import {ThemeContext} from './ThemeContext'
 
 
 
@@ -69,8 +68,31 @@ function App() {
   }
 
   const handleEdit = (id) =>{
-    const newEdit = todolist.find(item => item.id === id)
-    setInput(newEdit.name)
+
+    const newEdit = todolist.find((item) => item.id === id);
+    setInput(newEdit[0]);
+    console.log(newEdit.name )
+    // const { todolist } = this.state;
+    // const newTodolist = todolist.filter(item =>  item.id !== id)
+    // const newEdit = todolist.find(item =>  item.id === id)
+    // console.log(newEdit.name);
+    // this.setState({
+    //   //todolist: newTodolist,
+    //   value: newEdit.name
+    // })
+    // this.headerRef.current.focusInput(newEdit.name);
+    // const newUpdate = todolist.map((item) => {
+    //   if (item.id === id) {
+    //     console.log(item)
+    //     return {
+    //       ...item,
+    //     };
+    //   }
+    //   return item;
+    // })
+    // this.setState({
+    //   todolist:newUpdate
+    // })
   }
   
 

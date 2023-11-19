@@ -68,9 +68,32 @@ function App() {
     }
   }
 
-  const handleEdit = (id) =>{
-    const newEdit = todolist.find(item => item.id === id)
-    setInput(newEdit.name)
+  const handleEdit = (e) =>{
+    setFilterTodo({...filterTodo, name :e.target.vale})
+    // const newEdit = todolist.find((item) => item.id === id);
+    // setInput(newEdit[0]);
+    // console.log(newEdit.name )
+    // const { todolist } = this.state;
+    // const newTodolist = todolist.filter(item =>  item.id !== id)
+    // const newEdit = todolist.find(item =>  item.id === id)
+    // console.log(newEdit.name);
+    // this.setState({
+    //   //todolist: newTodolist,
+    //   value: newEdit.name
+    // })
+    // this.headerRef.current.focusInput(newEdit.name);
+    // const newUpdate = todolist.map((item) => {
+    //   if (item.id === id) {
+    //     console.log(item)
+    //     return {
+    //       ...item,
+    //     };
+    //   }
+    //   return item;
+    // })
+    // this.setState({
+    //   todolist:newUpdate
+    // })
   }
   
 

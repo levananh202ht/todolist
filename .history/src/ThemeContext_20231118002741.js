@@ -1,0 +1,27 @@
+import React, { useState} from "react";
+
+//const ThemeContext = React.createContext();
+
+const theme = {
+    light: "light",
+    dark: "dark"
+}
+const ThemeProvider = () => {
+
+    const [ themeActive, setThemeActive] = useState(theme.light);
+
+    const handleTheme = () => {
+        if(themeActive === theme.dark) {
+            document.documentElement.setAttribute('data-theme', 'light');
+            setThemeActive(theme.light);
+        }
+        else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            setThemeActive(theme.dark);
+        }
+    }
+    return (
+
+    )
+}
+export default ThemeProvider

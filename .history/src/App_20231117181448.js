@@ -1,0 +1,194 @@
+import React, {useRef, useState, useEffect} from 'react'
+import './App.css';
+
+import Header from './Header';
+import ContentList from './ContentList';
+import Footer from './Footer';
+import Theme from './Theme'
+
+
+const ThemeContext = React.createContext();
+
+const theme = {
+  light: "light",
+  dark: "dark"
+}
+export const newFilter = {
+  All: "All",
+  Active: "Active",
+  Completed: "Completed",
+};
+function App() {
+  const [todolist, setTodolist] = useState([
+    {id: 1, name: "hoc", isCompleted: true },
+    {id: 2, name: "choi", isCompleted: false }
+  ]);
+  const [input, setInput] = useState("");
+  const [filterTodo, setFilterTodo] = useState([]);
+ //const [selectItem, setSelectItem] = useState(null)
+  const [ themeActive, setThemeActive] = useState(theme.light);
+  const [currPage, setCurrPage] = useState(1);
+  const headerRef = useRef(null);
+  const numberTodolist = useRef();
+  
+  
+  useEffect(() => setFilterTodo(todolist) ,[todolist])
+  
+  const addItem = (item) => {  
+      setTodolist([item, ...todolist]);
+  }
+  
+  const toggleCompleteStatus = (id) => {
+    const newCompleted =  todolist.map((item) => {
+      if (item.id === id) {
+        return { ...item, isCompleted: !item.isCompleted };
+      }
+      return item;
+    })
+    setTodolist(newCompleted)
+  };
+  const deleteItem = (id) => {
+    const newDelete = todolist.filter((item) => item.id !== id);
+    setTodolist(newDelete)
+  }
+  const deleteAll = () => {
+    const newList = todolist.filter((item) => !item.isCompleted)
+    setTodolist(newList)
+  };
+  const renderFilter = (newww) => {
+    
+    switch (newww) {
+      case newFilter.All:
+        setFilterTodo(todolist)
+        break;
+      case newFilter.Active:       
+      setFilterTodo(todolist.filter((item) => !item.isCompleted));  
+        break;
+      case newFilter.Completed:
+        setFilterTodo(todolist.filter((item) => item.isCompleted));
+      
+        break;
+      default:
+        break;
+    }
+  }
+  // const hanlSubmit = (e) => {
+  //   e.preventDefault();
+  //   if(input!==""){
+  //     setFilterTodo([{id: `${input}-${Date.now()}`, input},...filterTodo])
+
+  //     setInput("")
+  //   }
+  // }
+  const handleEdit = (id) =>{
+
+    const newEdit = todolist.find((item) => item.id === id);
+    setInput(newEdit[0]);
+    console.log(newEdit.name )
+    // const { todolist } = this.state;
+    // const newTodolist = todolist.filter(item =>  item.id !== id)
+    // const newEdit = todolist.find(item =>  item.id === id)
+    // console.log(newEdit.name);
+    // this.setState({
+    //   //todolist: newTodolist,
+    //   value: newEdit.name
+    // })
+    // this.headerRef.current.focusInput(newEdit.name);
+    // const newUpdate = todolist.map((item) => {
+    //   if (item.id === id) {
+    //     console.log(item)
+    //     return {
+    //       ...item,
+    //     };
+    //   }
+    //   return item;
+    // })
+    // this.setState({
+    //   todolist:newUpdate
+    // })
+  }
+  const handleTheme = () => {
+    if(themeActive === theme.dark) {
+      document.documentElement.setAttribute('data-theme', 'light');
+      setThemeActive(theme.light);
+    }
+    else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      setThemeActive(theme.dark);
+    }
+  }
+  // useEffect(() => {
+  //   if (numberTodolist.current) {
+  //     numberTodolist.current('scroll', onScroll);
+  //     debugger
+  //   }
+    
+  //   return () => {
+  //     if (numberTodolist.current) {
+  //       numberTodolist.current('scroll', onScroll);
+  //     }
+  //   };
+  // }, [ currPage]); 
+
+  useEffect(() => {
+    const handleScroll = () => {
+      debugger
+      if (numberTodolist.current) {
+        debugger
+        const { scrollTop, scrollHeight, clientHeight } = numberTodolist.current;
+
+        if (scrollTop + clientHeight === scrollHeight) {
+          setCurrPage(currPage + 1);
+        }
+      }
+    };
+
+    // Attach the scroll event listener to the component
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [currPage]);
+
+  // const onScroll = () => {
+  //   debugger
+  //   if (numberTodolist.current) {
+  //     debugger
+  //     const { scrollTop, scrollHeight, clientHeight } = numberTodolist.current;
+  //     debugger
+  //     if (scrollTop + clientHeight === scrollHeight) {
+  //       setCurrPage(currPage + 1);
+  //     }
+  //   }
+  // }
+  return(
+    <ThemeContext.Provider >
+      <div className='container'>
+        <h1>todos</h1>
+        <div className='main'>
+          <div className='content'>
+            <Theme handleTheme={handleTheme} />
+            <Header ref={headerRef} addItem={addItem}  />
+            <ContentList 
+            numberTodolist={numberTodolist}
+            //onScroll={onScroll}
+            toggleCompleteStatus={toggleCompleteStatus}
+            todolist={filterTodo} 
+            deleteItem={deleteItem}
+            handleEdit={handleEdit}
+           // hanlSubmit={hanlSubmit}
+            />
+            <Footer   
+            renderFilter={renderFilter}
+            deleteAll={deleteAll}
+            todolist={filterTodo} 
+            />
+          </div>
+        </div>
+      </div>
+    </ThemeContext.Provider>
+  )
+}
+export default App;
